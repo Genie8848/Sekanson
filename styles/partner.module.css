@@ -20,23 +20,41 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+<<<<<<< HEAD
     grid-gap: var(--gap);
     gap: var(--gap);
     min-width: 100%;
+=======
+    grid-gap: calc(clamp(10rem, calc(1rem + 40vmin), 30rem)/14);
+    gap: calc(clamp(10rem, calc(1rem + 40vmin), 30rem)/14);
+    grid-gap: var(--gap);
+    gap: var(--gap);
+    min-width: 100%;
+    -webkit-animation: scroll-x 120s linear infinite;
+    animation: scroll-x 120s linear infinite;
+>>>>>>> 05e25d4ce2744cb4c7fae29f0846c563a6a34d57
     -webkit-animation: scroll-x var(--duration) linear infinite;
     animation: scroll-x var(--duration) linear infinite;
 }
 
+<<<<<<< HEAD
 /* .marquee:hover {
     animation-play-state: paused;
 } */
 
+=======
+>>>>>>> 05e25d4ce2744cb4c7fae29f0846c563a6a34d57
 .marquee__group__marquee__reverse {
     animation-direction: reverse;
     -webkit-animation-delay: -3s;
     animation-delay: -3s;
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 05e25d4ce2744cb4c7fae29f0846c563a6a34d57
 @-webkit-keyframes scroll-x {
     0% {
         -webkit-transform: translateX(0);

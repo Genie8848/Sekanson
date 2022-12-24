@@ -30,7 +30,11 @@ export default function Home() {
       </Head>
       <main className={
         clsx(
+<<<<<<< HEAD
           "font-mono bg-white relative h-screen z-0 overflow-scroll",
+=======
+          "font-mono bg-white relative overflow-hidden h-screen z-0 overflow-scroll",
+>>>>>>> 05e25d4ce2744cb4c7fae29f0846c563a6a34d57
         )
       }
       >
