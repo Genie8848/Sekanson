@@ -1,8 +1,63 @@
-import React from "react";
+import clsx from "clsx";
+import React, { useState } from "react";
 
 type Props = {};
 
 const FAQ = (props: Props) => {
+  const faqs = [
+    {
+      title: "Why use Mintplex over OpenSea, Rarible, or Foundation?",
+      description: "Did you know that when you mint on a marketplace you don\'t actually own your token? Your NFT is minted under the marketplace's smart contract and typically cannot be traded on another marketplace! With Mintplex your NFT is governed by its own smart contract - so it can go anywhere!"
+    },
+    {
+      title: " Why use Mintplex over OpenSea, Rarible, or Foundation? Cont.",
+      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+    },
+    {
+      title: "Who is hosting my images?",
+      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+    },
+    {
+      title: "What does it cost to use Mintplex?",
+      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+    },
+    {
+      title: "Who is hosting my images?",
+      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+    },
+    {
+      title: "Can I use Mintplex for Music NFTs?",
+      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+    },
+    {
+      title: "What chains and tokens are supported?",
+      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+    },
+  ]
+
+  const SingleFaqComponent = ({ faq }: any) => {
+    const [active, setActive] = useState(false)
+    return (
+      <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
+        <dt className="" onClick={() => setActive(prev => !prev)}>
+          <h3 className="text-xl text-rampporange font-semibold">
+            {faq.title}
+          </h3>
+        </dt>
+        <dd className={clsx(
+          " transition-all ease-in-out duration-[2000ms] delay-300",
+          active ? "block" : "hidden"
+        )}>
+          <p className="text-gray-500">
+            {faq.description}
+          </p>
+        </dd>
+      </div>
+    )
+  }
+
+
+
   return (
     <div>
       <section
@@ -21,62 +76,11 @@ const FAQ = (props: Props) => {
           </p>
         </div>
         <dl className="w-full md:w-1/2 mx-auto px-2 md:px-0">
-          <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
-            <dt>
-              <h3 className="text-xl font-semibold text-rampporange font-semibold">
-                Why use Mintplex over OpenSea, Rarible, or Foundation?
-              </h3>
-            </dt>
-          </div>
-          <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
-            <dt>
-              <h3 className="text-xl font-semibold text-rampporange font-semibold">
-                Why use Mintplex over OpenSea, Rarible, or Foundation? Cont.
-              </h3>
-            </dt>
-          </div>
-          <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
-            <dt>
-              <h3 className="text-xl font-semibold text-rampporange font-semibold">
-                Who is hosting my images?
-              </h3>
-            </dt>
-          </div>
-          <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
-            <dt>
-              <h3 className="text-xl font-semibold text-rampporange font-semibold">
-                I don&apos;t know how to code - does that matter?
-              </h3>
-            </dt>
-          </div>
-          <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
-            <dt>
-              <h3 className="text-xl font-semibold text-rampporange font-semibold">
-                What features can my smart contract have?
-              </h3>
-            </dt>
-          </div>
-          <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
-            <dt>
-              <h3 className="text-xl font-semibold text-rampporange font-semibold">
-                What does it cost to use Mintplex?
-              </h3>
-            </dt>
-          </div>
-          <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
-            <dt>
-              <h3 className="text-xl font-semibold text-rampporange font-semibold">
-                Can I use Mintplex for Music NFTs?
-              </h3>
-            </dt>
-          </div>
-          <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
-            <dt>
-              <h3 className="text-xl font-semibold text-rampporange font-semibold">
-                What chains and tokens are supported?
-              </h3>
-            </dt>
-          </div>
+          {faqs.map((faq: any, index: any) => {
+            return (
+              <SingleFaqComponent key={index} faq={faq} />
+            )
+          })}
         </dl>
       </section>
     </div>

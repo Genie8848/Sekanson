@@ -40,7 +40,9 @@ const Hero = (props: Props) => {
                                 <button onClick={() => { router.push("/my/projects") }} className="py-4 my-2 text-lg px-4 mt-6 bg-white text-ramppblue hover:text-white font-regular rounded-lg shadow-md  hover:bg-ramppdeepblue border-2 border-ramppblue">
                                     Launch a Project
                                 </button>
-                                <button className="text-lg text-gray-700">Learn More →</button>
+                                <button className="text-lg text-gray-700">
+                                    <a href="#faq">Learn More →</a>
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -4,14 +4,13 @@ import { Inter, Yeseva_One } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import Hero from "../components/Hero";
 import PartnersAndFounders from "../components/PartnersAndFounders";
-import Section4 from "../components/Section4";
-import Section3 from "../components/Section3";
 import Section2 from "../components/Section2";
 import Section1 from "../components/Section1";
 import Footer from "../components/Footer";
 import clsx from "clsx";
 import FAQ from "../components/FAQ";
 import Navbar from "../components/Navbar";
+import WhyMintplex from "../components/WhyMintplex";
 
 const inter = Inter({ subsets: ["latin"] });
 const yesevaOne = Yeseva_One({
@@ -37,7 +36,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <PartnersAndFounders />
-        <Section3 />
+        <WhyMintplex />
         <Section2 />
         <Section1 />
         <FAQ />
