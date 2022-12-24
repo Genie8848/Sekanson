@@ -1,25 +1,10 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter, Yeseva_One } from "@next/font/google";
-import styles from "../styles/Home.module.css";
 import Hero from "../components/Hero";
 import PartnersAndFounders from "../components/PartnersAndFounders";
-import Section2 from "../components/WhoisMintplex";
-import Section1 from "../components/MintplexRecipes";
-import Footer from "../components/Footer";
-import clsx from "clsx";
 import FAQ from "../components/FAQ";
-import Navbar from "../components/Navbar";
 import WhyMintplex from "../components/WhyMintplex";
 import MintplexRecipes from "../components/MintplexRecipes";
 import WhoisMintplex from "../components/WhoisMintplex";
 import BaseLayout from "../components/BaseLayout";
-
-const inter = Inter({ subsets: ["latin"] });
-const yesevaOne = Yeseva_One({
-  subsets: ["cyrillic"],
-  weight: "400"
-});
 
 export default function Home() {
   return (
