@@ -1,9 +1,6 @@
 import { Yeseva_One } from "@next/font/google";
 import clsx from "clsx";
-<<<<<<< HEAD
 import { useRouter } from "next/router";
-=======
->>>>>>> 05e25d4ce2744cb4c7fae29f0846c563a6a34d57
 import React from "react";
 
 type Props = {};
@@ -13,10 +10,7 @@ const yesevaOne = Yeseva_One({
     weight: ["400"],
 });
 const Hero = (props: Props) => {
-<<<<<<< HEAD
     const router = useRouter()
-=======
->>>>>>> 05e25d4ce2744cb4c7fae29f0846c563a6a34d57
     return (
         <section
             style={{
@@ -43,11 +37,7 @@ const Hero = (props: Props) => {
                         </p>
                         <div className="flex flex-col items-center justify-center mt-2">
                             <div className="text-center w-full space-x-8 items-center justify-center">
-<<<<<<< HEAD
                                 <button onClick={() => { router.push("/my/projects") }} className="py-4 my-2 text-lg px-4 mt-6 bg-white text-ramppblue hover:text-white font-regular rounded-lg shadow-md  hover:bg-ramppdeepblue border-2 border-ramppblue">
-=======
-                                <button className="py-4 my-2 text-lg px-4 mt-6 bg-white text-ramppblue hover:text-white font-regular rounded-lg shadow-md  hover:bg-ramppdeepblue border-2 border-ramppblue">
->>>>>>> 05e25d4ce2744cb4c7fae29f0846c563a6a34d57
                                     Launch a Project
                                 </button>
                                 <button className="text-lg text-gray-700">Learn More →</button>
