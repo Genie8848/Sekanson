@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import Link from 'next/link'
 import React from 'react'
 
@@ -21,13 +22,14 @@ const Footer = (props: Props) => {
                 </div>
                 <div className="w-fit flex flex-col space-y-2 py-6 md:py-4 items-center md:items-end">
                     <button className="py-1 px-2 flex text-ramppblue hover:text-white border-2 border-ramppblue rounded-md hover:bg-ramppdeepblue">Launch a Project</button>
-                    <Link href="/" className="text-lg text-dark-gray">About Mintplex</Link>
-                    <a href="https://twitter.com/@mintplexnft" className="text-lg text-dark-gray">Follow us on Twitter</a>
-                    <a href="https://tally.so/r/3q4G4O" target="_blank" rel="noreferrer" className="text-lg text-dark-gray">Join our community</a>
+                    <Link href="/" className="text-lg text-darkgray">About Mintplex</Link>
+                    <a href="https://twitter.com/@mintplexnft" className="text-lg text-darkgray">Follow us on Twitter</a>
+                    <a href="https://tally.so/r/3q4G4O" target="_blank" rel="noreferrer" className="text-lg text-darkgray">Join our community</a>
                 </div>
             </div>
             <div className="w-full justify-center flex">
-                <p className="text-rampporange">© 2022 Mintplex Labs Inc. All rights reserved.</p></div>
+                <p className="text-rampporange">© {format(new Date(), "yyyy")} Mintplex Labs Inc. All rights reserved.</p>
+            </div>
         </footer>
     )
 }

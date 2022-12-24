@@ -12,21 +12,13 @@ const yesevaOne = Yeseva_One({
 const Hero = (props: Props) => {
     const router = useRouter()
     return (
-        <section
-            style={{
-                height: "70vh",
-                backgroundRepeat: "repeat-x",
-                backgroundPosition: "50% center",
-                backgroundImage: "url('/images/patterntop.svg')",
-            }}
-        >
-            <div className="flex relative items-center">
+        <section>
+            <div className="flex relative items-center bg-repeat-x h-[70vh] bg-[url('/images/patterntop.svg')] bg-center">
                 <div className="container mx-auto  px-6 flex flex-col justify-between items-center relative my-20">
                     <div className="flex flex-col">
                         <h1
                             className={clsx(
-                                yesevaOne.className,
-                                " text-4xl md:text-5xl mb-6 w-full md:w-2/3 mx-auto text-center !font-bold text-gray-800"
+                                " text-4xl md:text-5xl mb-6 w-full md:w-2/3 mx-auto text-center !font-bold text-gray-800 font-YesevaOne"
                             )}
                         >
                             Build better NFT communities without code.
@@ -40,7 +32,9 @@ const Hero = (props: Props) => {
                                 <button onClick={() => { router.push("/my/projects") }} className="py-4 my-2 text-lg px-4 mt-6 bg-white text-ramppblue hover:text-white font-regular rounded-lg shadow-md  hover:bg-ramppdeepblue border-2 border-ramppblue">
                                     Launch a Project
                                 </button>
-                                <button className="text-lg text-gray-700">Learn More →</button>
+                                <button className="text-lg text-gray-700">
+                                    <a href="#faq">Learn More →</a>
+                                </button>
                             </div>
                         </div>
                     </div>

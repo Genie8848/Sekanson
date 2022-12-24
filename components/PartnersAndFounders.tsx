@@ -5,6 +5,7 @@ import styles from "../styles/partner.module.css";
 type Props = {};
 
 const PartnersAndFounders = (props: Props) => {
+
     const partners = [
         {
             id: "1",
@@ -38,7 +39,7 @@ const PartnersAndFounders = (props: Props) => {
         },
         {
             id: "6",
-            src: "/public/images/simplehash.webp",
+            src: "/images/simplehash.webp",
             alt: "Mintplex Partner",
             href: "https://simplehash.com/?ref=mintplex.xyz",
         },
@@ -86,21 +87,16 @@ const PartnersAndFounders = (props: Props) => {
                 {partners.map((partner: any, index: number) => {
                     return (
                         <a
-                            key={partner.id + index}
+                            key={partner.id}
                             target="_blank"
                             rel="noreferrer"
                             href={partner.href}
-                            className="p-4 rounded-lg bg-gray-100 flex items-center justify-center cursor-pointer"
-                            style={{
-                                width: "200px",
-                                height: "100px",
-                            }}
+                            className="p-4 rounded-lg bg-gray-100 flex items-center justify-center cursor-pointer h-24 w-52 filter hover:grayscale-0"
                         >
                             <img
                                 src={partner.src}
                                 alt="Mintplex Partner"
-                                className="w-40 h-auto"
-                                style={{ filter: "grayceral(0)" }}
+                                className="w-40 h-auto object-contain max-h-14 "
                             />
                         </a>
                     );
@@ -111,14 +107,14 @@ const PartnersAndFounders = (props: Props) => {
 
     return (
         <section className="w-full border-t border-color-gray-100 ">
-            <input type="hidden" className="w-40 w-48 w-28 w-12" />
+            <input type="hidden" className="w-28 w-12" />
             <div className="w-full flex flex-col items-center my-10">
                 <p className="font-semibold text-lg text-gray-700 uppercase pb-6">
                     Partners and Friends
                 </p>
                 <section
                     className={clsx(
-                        "flex flex-col m-auto max-w-screen-2xl md:w-1/2 h-80 md:flex",
+                        "flex flex-col m-auto max-w-screen-2xl md:w-1/2 md:flex",
                         styles.wrapper
                     )}
                 >

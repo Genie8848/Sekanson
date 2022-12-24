@@ -280,6 +280,60 @@ const Navbar = (props: Props) => {
                     className="py-1 flex text-gray-800 border-b border-white hover:border-gray-200 flex items-center"
                     id="options-menu"
                 >
+                    Tools
+                </button>
+                {isActive &&
+                    <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10">
+                        <div
+                            className="py-1 "
+                            role="menu"
+                            aria-orientation="vertical"
+                            aria-labelledby="options-menu"
+                        >
+                            <Link
+                                href="https://nft-inator.com/?ref=mintplex.xyz"
+                                rel="noreferrer"
+                                target="_blank"
+                                className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                            >
+                                <span className="flex flex-col">
+                                    <span>No-Code NFT Generator</span>
+                                </span>
+                            </Link>
+                            <Link
+                                href="/tools/metadata-maker"
+                                className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                                role="menuitem"
+                            >
+                                <span className="flex flex-col">
+                                    <span>Metadata Editor</span>
+                                </span>
+                            </Link>
+                            <Link
+                                href="/tools/opensea-bulk-refresh"
+                                className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                                role="menuitem"
+                            >
+                                <span className="flex flex-col">
+                                    <span>OS Bulk Image Refresh</span>
+                                </span>
+                            </Link>
+                        </div>
+                    </div>
+                }
+            </div>
+        )
+    }
+    const ToolsWithExtraPopupMenu = () => {
+        const [isActive, setIsActive] = useState(false)
+        return (
+            <div className="relative inline-block text-left">
+                <button
+                    type="button"
+                    onClick={() => setIsActive(prev => !prev)}
+                    className="py-1 flex text-gray-800 border-b border-white hover:border-gray-200 flex items-center"
+                    id="options-menu"
+                >
                     Tools &amp; Extras
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -597,7 +651,7 @@ const Navbar = (props: Props) => {
                                         >
                                             Support
                                         </a>
-                                        <ToolsPopupMenu />
+                                        <ToolsWithExtraPopupMenu />
 
                                         <ProfilePopupMenu />
                                     </nav>
@@ -618,17 +672,7 @@ const Navbar = (props: Props) => {
                                         >
                                             FAQ
                                         </a>
-                                        <div className="relative inline-block text-left">
-                                            <div>
-                                                <button
-                                                    type="button"
-                                                    className="py-1 flex  border-b border-white hover:border-gray-200"
-                                                    id="options-menu"
-                                                >
-                                                    Tools
-                                                </button>
-                                            </div>
-                                        </div>
+                                        <ToolsPopupMenu />
                                         <a
                                             href="https://twitter.com/@mintplexnft"
                                             target="_blank"

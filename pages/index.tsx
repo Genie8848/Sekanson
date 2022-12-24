@@ -4,14 +4,16 @@ import { Inter, Yeseva_One } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import Hero from "../components/Hero";
 import PartnersAndFounders from "../components/PartnersAndFounders";
-import Section4 from "../components/Section4";
-import Section3 from "../components/Section3";
-import Section2 from "../components/Section2";
-import Section1 from "../components/Section1";
+import Section2 from "../components/WhoisMintplex";
+import Section1 from "../components/MintplexRecipes";
 import Footer from "../components/Footer";
 import clsx from "clsx";
 import FAQ from "../components/FAQ";
 import Navbar from "../components/Navbar";
+import WhyMintplex from "../components/WhyMintplex";
+import MintplexRecipes from "../components/MintplexRecipes";
+import WhoisMintplex from "../components/WhoisMintplex";
+import BaseLayout from "../components/BaseLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 const yesevaOne = Yeseva_One({
@@ -21,30 +23,14 @@ const yesevaOne = Yeseva_One({
 
 export default function Home() {
   return (
-    <>
-      <Head>
-        <title>Mintplex - Build and grow your NFT community without code</title>
-        <meta name="description" content="Launching and managing an NFT community is hard. Mintplex has all the tools you need to launch, track, and manage your NFT community and project at scale. All without code."></meta>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={
-        clsx(
-          "font-mono bg-white relative h-screen z-0 overflow-scroll",
-        )
-      }
-      >
-        <Navbar />
-        <Hero />
-        <PartnersAndFounders />
-        <Section3 />
-        <Section2 />
-        <Section1 />
-        <FAQ />
-        <Footer />
-
-      </main>
-    </>
+    <BaseLayout>
+      <Hero />
+      <PartnersAndFounders />
+      <WhyMintplex />
+      <WhoisMintplex />
+      <MintplexRecipes />
+      <FAQ />
+    </BaseLayout>
   );
 }
 
