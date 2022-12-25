@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {};
 
-const WhoisMintplex = (props: Props) => {
+const WhoisSekanson = (props: Props) => {
     return (
         <section
             className="py-0 md:py-4 bg-white"
@@ -13,7 +13,7 @@ const WhoisMintplex = (props: Props) => {
             }}
         >
             <div className="bg-ramppgold w-full md:w-3/5 rounded-xl md:mx-auto md:m-6 px-8 py-4">
-                <p className="text-5xl text-white ff text-center">Who is Mintplex?</p>
+                <p className="text-5xl text-white ff text-center">Who is Sekanson?</p>
                 <div className="grid grid-cols-2 gap-y-8 mx-auto p-14">
                     <div className="flex flex-col space-y-3 w-full justify-center items-center">
                         <img
@@ -115,4 +115,4 @@ const WhoisMintplex = (props: Props) => {
     );
 };
 
-export default WhoisMintplex;
+export default WhoisSekanson;

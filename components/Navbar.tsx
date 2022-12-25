@@ -1,12 +1,13 @@
-import { Menu, Listbox } from "@headlessui/react";
+import { Listbox } from "@headlessui/react";
 import clsx from "clsx";
 import Link from "next/link";
-import React, { Fragment, ReactNode, useState } from "react";
+import React, { Fragment, useState } from "react";
+import { useAppContext } from "../context/AppContext";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
-    const [isConnected, setIsConnected] = useState(false)
+    const { connected, setConnected, selectedChain, setSelectedChain } = useAppContext()
     const [isMenuOpened, setIsMenuOpened] = useState(false)
 
     const chains: Array<any> = [
@@ -78,7 +79,6 @@ const Navbar = (props: Props) => {
         },
 
     ];
-    const [selectedChain, setSelectedChain] = useState<any>(chains[0])
 
     // const ChainMenu = () => {
     //     <Menu>
@@ -460,7 +460,7 @@ const Navbar = (props: Props) => {
                             </button>
                             <button onClick={() => {
                                 setIsActive(false)
-                                setIsConnected(false)
+                                setConnected(false)
                             }} className="w-full text-left px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600">
                                 Disconnect
                             </button>
@@ -571,14 +571,14 @@ const Navbar = (props: Props) => {
                                 <p className="text-2xl">🎉</p>
                                 <div className=" flex flex-col">
                                     <p className="text-gray-500 text-sm">
-                                        Mintplex Pro now only <b>$12.00 per month</b>!
+                                        Sekanson Pro now only <b>$12.00 per month</b>!
                                     </p>
                                 </div>
                             </div>
                         </a>
                     </div>
                     {
-                        isConnected ?
+                        connected ?
                             (
                                 <div className="flex items-center">
                                     <nav className="text-gray-800 dark:text-white text-md lg:flex space-x-8 items-center hidden">
@@ -681,7 +681,7 @@ const Navbar = (props: Props) => {
                                             Twitter
                                         </a>
                                         <button onClick={() => {
-                                            setIsConnected(true)
+                                            setConnected(true)
                                         }} className="py-1 px-2 flex text-ramppblue hover:text-white border-2 border-ramppblue rounded-md hover:bg-ramppdeepblue">
                                             Launch a Project
                                         </button>

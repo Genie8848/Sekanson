@@ -6,32 +6,32 @@ type Props = {};
 const FAQ = (props: Props) => {
   const faqs = [
     {
-      title: "Why use Mintplex over OpenSea, Rarible, or Foundation?",
-      description: "Did you know that when you mint on a marketplace you don\'t actually own your token? Your NFT is minted under the marketplace's smart contract and typically cannot be traded on another marketplace! With Mintplex your NFT is governed by its own smart contract - so it can go anywhere!"
+      title: "Why use Sekanson over OpenSea, Rarible, or Foundation?",
+      description: "Did you know that when you mint on a marketplace you don\'t actually own your token? Your NFT is minted under the marketplace's smart contract and typically cannot be traded on another marketplace! With Sekanson your NFT is governed by its own smart contract - so it can go anywhere!"
     },
     {
-      title: " Why use Mintplex over OpenSea, Rarible, or Foundation? Cont.",
-      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
-    },
-    {
-      title: "Who is hosting my images?",
-      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
-    },
-    {
-      title: "What does it cost to use Mintplex?",
-      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+      title: " Why use Sekanson over OpenSea, Rarible, or Foundation? Cont.",
+      description: "Well, that is up to you! When you use Sekanson we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
     },
     {
       title: "Who is hosting my images?",
-      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+      description: "Well, that is up to you! When you use Sekanson we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
     },
     {
-      title: "Can I use Mintplex for Music NFTs?",
-      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+      title: "What does it cost to use Sekanson?",
+      description: "Well, that is up to you! When you use Sekanson we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+    },
+    {
+      title: "Who is hosting my images?",
+      description: "Well, that is up to you! When you use Sekanson we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+    },
+    {
+      title: "Can I use Sekanson for Music NFTs?",
+      description: "Well, that is up to you! When you use Sekanson we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
     },
     {
       title: "What chains and tokens are supported?",
-      description: "Well, that is up to you! When you use Mintplex we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
+      description: "Well, that is up to you! When you use Sekanson we will walk you through all the steps to make sure it works! We recommend Pinata.cloud"
     },
   ]
 
@@ -71,7 +71,7 @@ const FAQ = (props: Props) => {
             We have answers for you!
           </h2>
           <p className="text-gray-500 text-base text-center">
-            Mintplex is changing the NFT space so we prepared some questions and
+            Sekanson is changing the NFT space so we prepared some questions and
             answers you might have.
           </p>
         </div>

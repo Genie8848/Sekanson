@@ -10,74 +10,74 @@ const PartnersAndFounders = (props: Props) => {
         {
             id: "1",
             src: "/images/pinata.svg",
-            alt: "Mintplex Partner",
+            alt: "Sekanson Partner",
             href: "https://bit.ly/3wKprej",
         },
         {
             id: "2",
             src: "/images/typedream.svg",
-            alt: "Mintplex Partner",
-            href: "https://typedream.com/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://typedream.com/?ref=Sekanson.xyz",
         },
         {
             id: "3",
             src: "/images/alchemy.svg",
-            alt: "Mintplex Partner",
+            alt: "Sekanson Partner",
             href: "https://www.alchemy.com/",
         },
         {
             id: "4",
             src: "/images/quixotic.svg",
-            alt: "Mintplex Partner",
-            href: "https://qx.app/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://qx.app/?ref=Sekanson.xyz",
         },
         {
             id: "5",
             src: "/images/stratos.svg",
-            alt: "Mintplex Partner",
-            href: "https://stratosnft.io/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://stratosnft.io/?ref=Sekanson.xyz",
         },
         {
             id: "6",
             src: "/images/simplehash.webp",
-            alt: "Mintplex Partner",
-            href: "https://simplehash.com/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://simplehash.com/?ref=Sekanson.xyz",
         },
         {
             id: "7",
             src: "/images/bonfire.svg",
-            alt: "Mintplex Partner",
-            href: "https://trybonfire.xyz/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://trybonfire.xyz/?ref=Sekanson.xyz",
         },
         {
             id: "8",
             src: "/images/mintparty.svg",
-            alt: "Mintplex Partner",
-            href: "https://mintparty.xyz/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://mintparty.xyz/?ref=Sekanson.xyz",
         },
         {
             id: "9",
             src: "/images/winter.svg",
-            alt: "Mintplex Partner",
-            href: "https://www.usewinter.com/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://www.usewinter.com/?ref=Sekanson.xyz",
         },
         {
             id: "10",
             src: "/images/dhhlogo.svg",
-            alt: "Mintplex Partner",
-            href: "https://nft-inator.com/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://nft-inator.com/?ref=Sekanson.xyz",
         },
         {
             id: "11",
             src: "/images/SYNC.svg",
-            alt: "Mintplex Partner",
-            href: "https://syncnetwork.io/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://syncnetwork.io/?ref=Sekanson.xyz",
         },
         {
             id: "12",
             src: "/images/carma.svg",
-            alt: "Mintplex Partner",
-            href: "https://carma.community/?ref=mintplex.xyz",
+            alt: "Sekanson Partner",
+            href: "https://carma.community/?ref=Sekanson.xyz",
         },
     ];
 
@@ -95,7 +95,7 @@ const PartnersAndFounders = (props: Props) => {
                         >
                             <img
                                 src={partner.src}
-                                alt="Mintplex Partner"
+                                alt="Sekanson Partner"
                                 className="w-40 h-auto object-contain max-h-14 "
                             />
                         </a>
@@ -162,7 +162,7 @@ const PartnersAndFounders = (props: Props) => {
                     >
                         <img
                             src="/images/ycombinator.svg"
-                            alt="Mintplex Partner"
+                            alt="Sekanson Partner"
                             className="w-60 h-auto"
                             style={{ opacity: 1 }}
                         />
@@ -175,7 +175,7 @@ const PartnersAndFounders = (props: Props) => {
                     >
                         <img
                             src="/images/alchemy.svg"
-                            alt="Mintplex Partner"
+                            alt="Sekanson Partner"
                             className="w-60 h-auto"
                             style={{ opacity: 1 }}
                         />
@@ -183,12 +183,12 @@ const PartnersAndFounders = (props: Props) => {
                     <a
                         target="_blank"
                         rel="noreferrer"
-                        href="https://xcelerator.berkeley.edu/?ref=mintplex.xyz"
+                        href="https://xcelerator.berkeley.edu/?ref=Sekanson.xyz"
                         className="w-fit cursor-pointer"
                     >
                         <img
                             src="/images/bbx.webp"
-                            alt="Mintplex Partner"
+                            alt="Sekanson Partner"
                             className="w-12 h-auto"
                             style={{ opacity: 1 }}
                         />

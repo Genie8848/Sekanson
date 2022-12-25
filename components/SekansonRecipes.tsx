@@ -2,14 +2,14 @@ import React from "react";
 
 type Props = {};
 
-const MintplexRecipes = (props: Props) => {
+const SekansonRecipes = (props: Props) => {
     return (
         <section>
             <div className="bg-ramppdeepblue text-white py-8">
                 <div className="container mx-auto flex flex-col items-start md:flex-row my-12 overflow-x-scroll">
                     <div className="flex flex-col w-full md:top-36 w-fit mt-2 py-6 md:py-0 px-8">
                         <p className="text-5xl leading-normal md:leading-relaxed mb-2 ff">
-                            Mintplex Recipes
+                            Sekanson Recipes
                         </p>
                         <p className="text-2xl mb-4">
                             We offer tons of tools and plugins that make adding utility and
@@ -32,7 +32,7 @@ const MintplexRecipes = (props: Props) => {
                                 />
                             </div>
                             <p className="text-gray-600 leading-tight text-base">
-                                With Mintplex &apos; s Shopify Discount plugin you can dynamically
+                                With Sekanson &apos; s Shopify Discount plugin you can dynamically
                                 reward your NFT holders with discount codes on your own Shopify
                                 merch store!
                             </p>
@@ -49,7 +49,7 @@ const MintplexRecipes = (props: Props) => {
                         </div>
                         <div className="bg-white rounded-lg shadow-md flex flex-col p-4 w-full md:w-80 h-120 shadow-md">
                             <p className="ff font-bold text-black text-2xl">
-                                Bulk Airdrop with Mintplex
+                                Bulk Airdrop with Sekanson
                             </p>
                             <div className="w-full my-3">
                                 <img
@@ -59,7 +59,7 @@ const MintplexRecipes = (props: Props) => {
                                 />
                             </div>
                             <p className="text-gray-600 leading-tight text-base">
-                                Using Mintplex &apos; s advanced ERC-1155 standard you can easily
+                                Using Sekanson &apos; s advanced ERC-1155 standard you can easily
                                 airdrop new items to all your current NFT holders.
                             </p>
                             <div className="w-full flex justify-center mt-4">
@@ -74,7 +74,7 @@ const MintplexRecipes = (props: Props) => {
                         </div>
                         <div className="bg-white rounded-lg shadow-md flex flex-col p-4 w-full md:w-80 h-120 shadow-md">
                             <p className="ff font-bold text-black text-2xl">
-                                Mintplex minting in Discord
+                                Sekanson minting in Discord
                             </p>
                             <div className="w-full my-3">
                                 <img
@@ -84,7 +84,7 @@ const MintplexRecipes = (props: Props) => {
                                 />
                             </div>
                             <p className="text-gray-600 leading-tight text-base">
-                                With Mintplex &apos;s Discord bots you can host your public mint
+                                With Sekanson &apos;s Discord bots you can host your public mint
                                 inside of your project Discord.
                             </p>
                             <div className="w-full flex justify-center mt-4">
@@ -104,4 +104,4 @@ const MintplexRecipes = (props: Props) => {
     );
 };
 
-export default MintplexRecipes;
+export default SekansonRecipes;

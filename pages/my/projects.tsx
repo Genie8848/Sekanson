@@ -56,11 +56,11 @@ const Projects = (props: Props) => {
                                             </div>
                                             <div className="w-full mx-auto px-4 z-20">
                                                 <p className="font-bold text-3xl text-gray-800 ff">
-                                                    Build something amazing on Mintplex
+                                                    Build something amazing on Sekanson
                                                 </p>
                                                 <p className="pt-2 text-base text-gray-600">
                                                     With
-                                                    <b className="text-ramppblue text-bold">Mintplex</b>
+                                                    <b className="text-ramppblue text-bold">Sekanson</b>
                                                     you can start a few types of projects. Select the type
                                                     of project that best suits your needs.
                                                 </p>

@@ -3,16 +3,16 @@ import React from "react";
 
 type Props = {};
 
-const WhyMintplex = (props: Props) => {
+const WhySekanson = (props: Props) => {
     return (
         <>
             <section className={clsx("py-4")}>
                 <div className="flex-col space-y-4 pt-4 px-2 ">
                     <h2 className="ff text-5xl text-center font-bold text-black font-YesevaOne">
-                        Why Mintplex?
+                        Why Sekanson?
                     </h2>
                     <p className="text-darkgray text-base text-center font-Lato">
-                        Mintplex is a collection of all the tools you need to launch and
+                        Sekanson is a collection of all the tools you need to launch and
                         grow your NFT without compromises or code.
                     </p>
                 </div>
@@ -47,7 +47,7 @@ const WhyMintplex = (props: Props) => {
                             </div>
                         </div>
                         <p className="leading-loose text-gray-500 dark:text-gray-200 text-md">
-                            Mintplex supports ERC-721A and ERC-1155 contract generation.
+                            Sekanson supports ERC-721A and ERC-1155 contract generation.
                             Create a gas efficient and purpose built contracts for your
                             project in 5 minutes.
                         </p>
@@ -101,7 +101,7 @@ const WhyMintplex = (props: Props) => {
                             </div>
                         </div>
                         <p className="leading-loose text-gray-500 dark:text-gray-200 text-md">
-                            Geared for collections of 100 or 10,000. Mintplex provides you all
+                            Geared for collections of 100 or 10,000. Sekanson provides you all
                             the tools and resources to go from zero to 100% in minutes.
                         </p>
                     </div>
@@ -156,7 +156,7 @@ const WhyMintplex = (props: Props) => {
                             </div>
                         </div>
                         <p className="leading-loose text-gray-500 dark:text-gray-200 text-md">
-                            With Mintplex you own everything. From IPFS to mint button - know
+                            With Sekanson you own everything. From IPFS to mint button - know
                             your project is totally decentralized.
                         </p>
                     </div>
@@ -182,7 +182,7 @@ const WhyMintplex = (props: Props) => {
                             </div>
                         </div>
                         <p className="leading-loose text-gray-500 dark:text-gray-200 text-md">
-                            Mintplex is writing the playbook for utility in NFTs. Our tools
+                            Sekanson is writing the playbook for utility in NFTs. Our tools
                             allow you to easily add utility and purpose behind your collection
                             to keep your community engaged and growing.
                         </p>
@@ -235,7 +235,7 @@ const WhyMintplex = (props: Props) => {
                             </div>
                         </div>
                         <p className="leading-loose text-gray-500 dark:text-gray-200 text-md">
-                            Mintplex is open for all. No payment upfront. No email signup.
+                            Sekanson is open for all. No payment upfront. No email signup.
                             Just connect your wallet and launch.
                         </p>
                     </div>
@@ -277,10 +277,10 @@ const WhyMintplex = (props: Props) => {
             <section className="w-full flex bg-rampppink">
                 <div className="flex flex-col space-y-4 py-4 mx-4 md:mx-14 w-full">
                     <h2 className="ff text-5xl text-center font-bold text-white pb-0 mb-0">
-                        How is Mintplex doing?
+                        How is Sekanson doing?
                     </h2>
                     <p className="font-base text-center text-white w-full md:w-1/2 mx-auto leading-tight">
-                        We are continously adding new tools and functionality to Mintplex.
+                        We are continously adding new tools and functionality to Sekanson.
                         The best time to start is today.
                     </p>
                     <div className="flex flex-wrap w-fit gap-10 justify-center md:justify-between mx-auto items-center py-4">
@@ -301,7 +301,7 @@ const WhyMintplex = (props: Props) => {
                                 1.4M+
                             </p>
                             <p className="text-center text-white">
-                                NFT &apos;s minted with Mintplex
+                                NFT &apos;s minted with Sekanson
                             </p>
                         </div>
                     </div>
@@ -311,4 +311,4 @@ const WhyMintplex = (props: Props) => {
     );
 };
 
-export default WhyMintplex;
+export default WhySekanson;

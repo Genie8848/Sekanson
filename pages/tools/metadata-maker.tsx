@@ -7,7 +7,7 @@ const MetadataMaker = (props: Props) => {
     return (
         <BaseLayout>
             <h1>
-                Mintplex Metadata Maker
+                Sekanson Metadata Maker
             </h1>
         </BaseLayout>
     )
