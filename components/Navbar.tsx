@@ -331,7 +331,7 @@ const Navbar = (props: Props) => {
                 <button
                     type="button"
                     onClick={() => setIsActive(prev => !prev)}
-                    className="py-1 flex text-gray-800 border-b border-white hover:border-gray-200 flex items-center"
+                    className="py-1 text-gray-800 border-b border-white hover:border-gray-200 flex items-center"
                     id="options-menu"
                 >
                     Tools &amp; Extras
