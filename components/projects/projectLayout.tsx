@@ -31,7 +31,7 @@ const ProjectLayout = ({ children, selectedNetwork }: LayoutProps) => {
                                         />
                                         <div className="w-full flex flex-col bg-blue-50 rounded-lg h-auto p-2 overflow-hidden">
                                             <p className="font-black text-gray-800 whitespace-nowrap flex">
-                                                My Mintplex Project
+                                                My Sekanson Project
                                             </p>
                                             <p className="font-base text-gray-400 text-sm flex">
                                                 ERC-721A
@@ -50,7 +50,7 @@ const ProjectLayout = ({ children, selectedNetwork }: LayoutProps) => {
                                                         href="?new_sub=1"
                                                         className="text-sm text-blue-500 underline"
                                                     >
-                                                        Upgrade to Mintplex Pro →
+                                                        Upgrade to Sekanson Pro →
                                                     </a>
                                                 </div>
                                             </div>
@@ -354,7 +354,7 @@ const ProjectLayout = ({ children, selectedNetwork }: LayoutProps) => {
                                                 <circle cx="12" cy="13" r="4"></circle>
                                             </svg>
                                             <p className="text-black font-semibold">
-                                                Mintplex Snapshots
+                                                Sekanson Snapshots
                                             </p>
                                         </div>
                                     </Link>
@@ -428,7 +428,7 @@ const ProjectLayout = ({ children, selectedNetwork }: LayoutProps) => {
                                         </div>
                                     </Link>
                                     <Link
-                                        href="https://mintparty.xyz/account?onboarding=mintplex"
+                                        href="https://mintparty.xyz/account?onboarding=sekanson"
                                         rel="noreferrer"
                                         target="_blank"
                                         className="flex justify-between items-center hover:bg-gray-100 py-4 rounded-lg px-1 cursor-pointer"

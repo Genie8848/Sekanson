@@ -224,7 +224,7 @@ const Navbar = (props: Props) => {
                             aria-labelledby="options-menu"
                         >
                             <Link
-                                href="https://nft-inator.com/?ref=mintplex.xyz"
+                                href="https://nft-inator.com/?ref=sekanson.xyz"
                                 rel="noreferrer"
                                 target="_blank"
                                 className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
@@ -296,7 +296,7 @@ const Navbar = (props: Props) => {
                             aria-labelledby="options-menu"
                         >
                             <Link
-                                href="https://nft-inator.com/?ref=mintplex.xyz"
+                                href="https://nft-inator.com/?ref=sekanson.xyz"
                                 rel="noreferrer"
                                 target="_blank"
                                 className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
@@ -490,13 +490,13 @@ const Navbar = (props: Props) => {
                         <Link href="/">
 
                             <img
-                                src="/images/mintplex-logo-dark.svg"
+                                src="/images/sekanson-logo-dark.svg"
                                 className="h-10"
-                                alt="mintplex.xyz"
+                                alt="sekanson.xyz"
                             />
                         </Link>
                         <a
-                            href="https://twitter.com/mintplexnft/status/1603589091043332096"
+                            href="https://twitter.com/sekansonnft/status/1603589091043332096"
                             target="_blank"
                             rel="noreferrer"
                         >
@@ -577,7 +577,7 @@ const Navbar = (props: Props) => {
                                         <ChainSelectMenu />
 
                                         <a
-                                            href="https://trusting-lungfish-ebb.notion.site/Mintplex-FAQ-s-91f5d2700d764031a44c064ed49f8aec"
+                                            href="https://trusting-lungfish-ebb.notion.site/Sekanson-FAQ-s-91f5d2700d764031a44c064ed49f8aec"
                                             target="_blank"
                                             rel="noreferrer"
                                             className="flex items-center pb-1 border-b border-white hover:border-gray-200"
@@ -598,7 +598,7 @@ const Navbar = (props: Props) => {
                                 <div className="flex items-center">
                                     <nav className="text-gray-800 dark:text-white text-md  space-x-8 items-center hidden lg:flex">
                                         <a
-                                            href="https://trusting-lungfish-ebb.notion.site/Mintplex-FAQ-s-91f5d2700d764031a44c064ed49f8aec"
+                                            href="https://trusting-lungfish-ebb.notion.site/Sekanson-FAQ-s-91f5d2700d764031a44c064ed49f8aec"
                                             target="_blank"
                                             rel="noreferrer"
                                             className=""
@@ -607,7 +607,7 @@ const Navbar = (props: Props) => {
                                         </a>
                                         <ToolsPopupMenu />
                                         <a
-                                            href="https://twitter.com/@mintplexnft"
+                                            href="https://twitter.com/@sekansonnft"
                                             target="_blank"
                                             rel="noreferrer"
                                         >
@@ -637,7 +637,7 @@ const Navbar = (props: Props) => {
             }>
                 <div className="flex flex-col text-xl space-y-4 items-baseline">
                     <a
-                        href="https://twitter.com/@mintplexnft"
+                        href="https://twitter.com/@sekansonnft"
                         target="_blank"
                         rel="noreferrer"
                     >

@@ -166,7 +166,7 @@ const ProjectPayouts = (props: Props) => {
                             className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black"
                             autoComplete="off"
                             placeholder="Your Project Name"
-                            value="My Mintplex Project"
+                            value="My Sekanson Project"
                         />
                     </div>
                     <div className="flex flex-col">
@@ -340,7 +340,7 @@ const ProjectPayouts = (props: Props) => {
                             type="url"
                             className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black "
                             autoComplete="off"
-                            placeholder="@mintplexnft"
+                            placeholder="@sekansonnft"
                             value=""
                         />
                     </div>

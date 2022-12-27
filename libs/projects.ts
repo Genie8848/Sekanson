@@ -34,7 +34,7 @@ export const projectsData: any = [
     earlyMintIncentivePrice: 0,
     hasMintFee: true,
     contractURI: null,
-    name: "My Mintplex Project",
+    name: "My Sekanson Project",
     whitelistedAddresses: [],
     preRevealMetadataCid: null,
     onlyOwnerMinting: false,
@@ -114,5 +114,5 @@ export const project: any = {
   earlyMintIncentiveCap: 100,
   sellerFeeBasisPoints: 0,
   imageExtension: ".png",
-  name: "My Mintplex Project",
+  name: "My Sekanson Project",
 };
