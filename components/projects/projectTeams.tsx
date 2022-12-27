@@ -6,7 +6,7 @@ import ProjectLayout from "./projectLayout";
 
 type Props = {};
 
-const ProjectSettings = (props: Props) => {
+const ProjectTeams = (props: Props) => {
     const networkChains = [
         {
             id: "1",
@@ -77,78 +77,6 @@ const ProjectSettings = (props: Props) => {
                         </div>
                     )
                 })}
-                {/* <div
-                    onClick={() => setSelectedNetwork(NetworkEnum.Polygon)}
-                    className={
-                        clsx(
-                            "w-auto flex justify-center items-center space-x-4 p-4 border  bg-transparent rounded-lg cursor-pointer ",
-                            selectedNetwork === NetworkEnum.Polygon ? "" : ""
-                        )
-                    }>
-                    <img
-                        alt="polygon"
-                        src=""
-                        className="h-8"
-                    />
-                    <p>Polygon</p>
-                </div>
-                <div
-                    onClick={() => setSelectedNetwork(NetworkEnum.Optimism)}
-                    className={
-                        clsx(
-                            "w-auto flex justify-center items-center space-x-4 p-4 border  bg-transparent rounded-lg cursor-pointer ",
-                            selectedNetwork === NetworkEnum.Optimism ? "border-red-700 text-red-700 bg-red-100" : ""
-                        )
-                    }>
-                    <img
-                        alt="optimism"
-                        src="/images/optimism-logo.svg"
-                        className="h-8"
-                    />
-                    <p>Optimism</p>
-                </div>
-                <div
-                    onClick={() => setSelectedNetwork(NetworkEnum.Arbitrum)}
-                    className={
-                        clsx(
-                            "w-auto flex justify-center items-center space-x-4 p-4 border  bg-transparent rounded-lg cursor-pointer ",
-                            selectedNetwork === NetworkEnum.Arbitrum ? "border-blue-700 text-blue-700 bg-blue-100" : ""
-                        )
-                    }>
-                    <img
-                        alt="arbitrum"
-                        src="/images/arbitrum-logo.svg"
-                        className="h-8"
-                    />
-                    <p>Arbitrum</p>
-                </div>
-                <div
-                    onClick={() => setSelectedNetwork(NetworkEnum.Avalanche)}
-                    className={
-                        clsx(
-                            "w-auto flex justify-center items-center space-x-4 p-4 border border-red-300 hover:border-red-700 text-gray-300 hover:text-red-700 bg-transparent rounded-lg cursor-pointer ",
-                            selectedNetwork === NetworkEnum.Avalanche ? "border-red-700 text-red-700 bg-red-100" : ""
-                        )
-                    }>
-                    <img
-                        alt="avalanche"
-                        src="/images/avalanche-logo.svg"
-                        className="h-8"
-                    />
-                    <p>Avalanche</p>
-                </div>
-                <div onClick={() => setSelectedNetwork(NetworkEnum.BNBChain)}
-                    className={clsx(
-                        "w-auto flex justify-center items-center space-x-4 p-4 border bg-transparent rounded-lg cursor-pointer ",
-                        selectedNetwork === NetworkEnum.BNBChain ? " " : ""
-                    )}>
-                    <img
-                        alt="binance"
-                        src="/images/bnb-logo.svg"
-                        className="h-8"
-                    />
-                    <p>BNB Chain</p>
-                </div> */}
             </>
         )
     }
@@ -160,7 +88,7 @@ const ProjectSettings = (props: Props) => {
                 <div className="flex flex-col sticky top-0 bg-frosted z-10 flex-shrink py-2">
                     <div className="flex items-center space-x-10">
                         <h1 className="text-5xl font-black text-gray-700">
-                            Contract Information
+                            Teams Page
                         </h1>
                     </div>
                     <p className="my-2 text-gray-800">
@@ -422,4 +350,4 @@ const ProjectSettings = (props: Props) => {
     );
 };
 
-export default ProjectSettings;
+export default ProjectTeams;

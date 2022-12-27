@@ -3,6 +3,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import React, { Fragment, useState } from "react";
 import { useAppContext } from "../context/AppContext";
+import { AllChains } from "../libs/constants";
 
 type Props = {};
 
@@ -10,75 +11,7 @@ const Navbar = (props: Props) => {
     const { connected, setConnected, selectedChain, setSelectedChain } = useAppContext()
     const [isMenuOpened, setIsMenuOpened] = useState(false)
 
-    const chains: Array<any> = [
-        {
-            id: "1",
-            title: "Ethereum",
-            img: "/images/eth-logo.svg",
-            alt: "Ethereum chain",
-        },
-        {
-            id: "2",
-            title: "Polygon",
-            img: "/images/polygon-logo.svg",
-            alt: "Polygon chain",
-        },
-        {
-            id: "3",
-            title: "Mumbai",
-            style: {
-                filter: "sepia(100%)",
-            },
-            img: "/images/polygon-logo.svg",
-            alt: "Mumbai chain",
-        },
-        {
-            id: "4",
-            title: "Optimism",
-            img: "/images/optimism-logo.svg",
-            alt: "Optimism chain",
-        },
-        {
-            id: "5",
-            title: "Goerli Optimism",
-            style: {
-                filter: "sepia(100%)",
-            },
-            img: "/images/optimism-logo.svg",
-            alt: "Goerli Optimism chain",
-        },
-        {
-            id: "6",
-            title: "Arbitrum",
-            img: "/images/arbitrum-logo.svg",
-            alt: "Arbitrum chain",
-        },
-        {
-            id: "7",
-            title: "Arbitrum Testnet",
-            style: {
-                filter: "sepia(100%)",
-            },
-            img: "/images/arbitrum-logo.svg",
-            alt: "Arbitrum chain",
-        },
-        {
-            id: "8",
-            title: "Avalanche",
-            img: "/images/avalanche-logo.svg",
-            alt: "Avalanche chain",
-        },
-        {
-            id: "7",
-            title: "Avalanche Testnet",
-            style: {
-                filter: "sepia(100%)",
-            },
-            img: "/images/avalanche-logo.svg",
-            alt: "Avalanche chain",
-        },
 
-    ];
 
     // const ChainMenu = () => {
     //     <Menu>
@@ -497,7 +430,7 @@ const Navbar = (props: Props) => {
                     </Listbox.Button>
                     <Listbox.Options className="bg-white z-20 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5
                     ">
-                        {chains.map((chain) => (
+                        {AllChains.map((chain) => (
                             <Listbox.Option
                                 key={chain.id}
                                 value={chain}
