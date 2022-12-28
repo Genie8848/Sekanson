@@ -16,7 +16,7 @@ const WhySekanson = (props: Props) => {
                         grow your NFT without compromises or code.
                     </p>
                 </div>
-                <div className="grid grid-cols-0 md:grid-cols-3 gap-4 mx-auto p-4 md:px-14 ">
+                <div className="grid grid-cols-0 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto p-4 md:px-14 ">
                     <div className="w-full py-8 px-6 rounded-lg border-2 border-ramppblue">
                         <div className="flex items-center">
                             <div className="w-auto h-auto p-2 rounded-full">

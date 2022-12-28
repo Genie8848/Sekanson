@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { useAppContext } from '../../context/AppContext'
+import { nFormatter } from '../../utils/common'
 
 type Props = {}
 
@@ -37,7 +38,7 @@ const ProjectsList = (props: Props) => {
                     </div>
                     <div className="w-full flex justify-between py-4 px-5 mx-auto">
                         <div className="flex flex-col items-center">
-                            <p className="text-2xl font-black text-gray-700">{project.supply}</p>
+                            <p className="text-2xl font-black text-gray-700">{nFormatter(project.supply, 1)}</p>
                             <p className="text-sm font-semibold text-gray-500 uppercase">supply</p>
                         </div>
                         <div className="flex flex-col items-center">

@@ -156,7 +156,7 @@ const ProjectSettings = (props: Props) => {
 
     return (
         <ProjectLayout selectedNetwork={selectedNetwork} >
-            <div className="container w-full h-full p-6 relative">
+            <div className="container w-full h-full p-6 relative ">
                 <div className="flex flex-col sticky top-0 bg-frosted z-10 flex-shrink py-2">
                     <div className="flex items-center space-x-10">
                         <h1 className="text-5xl font-black text-gray-700">

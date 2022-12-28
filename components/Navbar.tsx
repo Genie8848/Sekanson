@@ -210,7 +210,7 @@ const Navbar = (props: Props) => {
                 <button
                     type="button"
                     onClick={() => setIsActive(prev => !prev)}
-                    className="py-1 flex text-gray-800 border-b border-white hover:border-gray-200 flex items-center"
+                    className="py-1 text-gray-800 border-b border-white hover:border-gray-200 flex items-center"
                     id="options-menu"
                 >
                     Tools
@@ -218,7 +218,7 @@ const Navbar = (props: Props) => {
                 {isActive &&
                     <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10">
                         <div
-                            className="py-1 "
+                            className="py-1"
                             role="menu"
                             aria-orientation="vertical"
                             aria-labelledby="options-menu"
@@ -227,15 +227,13 @@ const Navbar = (props: Props) => {
                                 href="https://nft-inator.com/?ref=sekanson.xyz"
                                 rel="noreferrer"
                                 target="_blank"
-                                className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                                className="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
                             >
-                                <span className="flex flex-col">
-                                    <span>No-Code NFT Generator</span>
-                                </span>
+                                <span>No-Code NFT Generator</span>
                             </Link>
                             <Link
                                 href="/tools/metadata-maker"
-                                className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                                className="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
                                 role="menuitem"
                             >
                                 <span className="flex flex-col">
@@ -244,7 +242,7 @@ const Navbar = (props: Props) => {
                             </Link>
                             <Link
                                 href="/tools/opensea-bulk-refresh"
-                                className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                                className="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
                                 role="menuitem"
                             >
                                 <span className="flex flex-col">
@@ -299,7 +297,7 @@ const Navbar = (props: Props) => {
                                 href="https://nft-inator.com/?ref=sekanson.xyz"
                                 rel="noreferrer"
                                 target="_blank"
-                                className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                                className="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
                             >
                                 <span className="flex flex-col">
                                     <span>No-Code NFT Generator</span>
@@ -488,10 +486,9 @@ const Navbar = (props: Props) => {
                 <div className="container mx-auto px-6 flex items-center justify-between">
                     <div className="dark:text-white flex gap-x-6 items-center">
                         <Link href="/">
-
                             <img
-                                src="/images/sekanson-logo-dark.svg"
-                                className="h-10"
+                                src="/android-chrome-512x512.png"
+                                className="h-12"
                                 alt="sekanson.xyz"
                             />
                         </Link>
