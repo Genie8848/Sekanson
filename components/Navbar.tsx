@@ -1,17 +1,47 @@
 import { Listbox } from "@headlessui/react";
 import clsx from "clsx";
 import Link from "next/link";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
+import { useListen } from "../hooks/useListen";
+import { useMetamask } from "../hooks/useMetamask";
 import { AllChains } from "../libs/constants";
+import { truncateAddress } from "../utils/address";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
     const { connected, setConnected, selectedChain, setSelectedChain } = useAppContext()
+    const { dispatch, state: { status, isMetamaskInstalled, wallet, balance }, } = useMetamask();
+    const listen = useListen();
+    const showInstallMetamask = status !== "pageNotLoaded" && !isMetamaskInstalled;
+    const showConnectButton = status !== "pageNotLoaded" && isMetamaskInstalled && !wallet;
+    const isConnected = status !== "pageNotLoaded" && typeof wallet === "string";
+
+    const handleConnect = async () => {
+        dispatch({ type: "loading" });
+        const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+
+        if (accounts.length > 0) {
+            const balance = await window.ethereum!.request({
+                method: "eth_getBalance",
+                params: [accounts[0], "latest"],
+            });
+
+            dispatch({ type: "connect", wallet: accounts[0], balance });
+
+            // we can register an event listener for changes to the users wallet
+            listen();
+        }
+    };
+
+    const handleDisconnect = () => {
+        dispatch({ type: "disconnect" });
+    };
+
     const [isMenuOpened, setIsMenuOpened] = useState(false)
-
-
 
     // const ChainMenu = () => {
     //     <Menu>
@@ -328,6 +358,31 @@ const Navbar = (props: Props) => {
         )
     }
 
+    useEffect(() => {
+        if (typeof window !== undefined) {
+            // start by checking if window.ethereum is present, indicating a wallet extension
+            const ethereumProviderInjected = typeof window.ethereum !== "undefined";
+            // this could be other wallets so we can verify if we are dealing with metamask
+            // using the boolean constructor to be explecit and not let this be used as a falsy value (optional)
+            const isMetamaskInstalled =
+                ethereumProviderInjected && Boolean(window.ethereum.isMetaMask);
+
+            const local = window.localStorage.getItem("metamaskState");
+
+            // user was previously connected, start listening to MM
+            if (local) {
+                listen();
+            }
+
+            // local could be null if not present in LocalStorage
+            const { wallet, balance } = local ? JSON.parse(local) : // backup if local storage is empty
+                { wallet: null, balance: null };
+
+            dispatch({ type: "pageLoaded", isMetamaskInstalled, wallet, balance });
+        }
+    }, []);
+
+
     const ProfilePopupMenu = () => {
         const [isActive, setIsActive] = useState(false)
         return (
@@ -375,7 +430,7 @@ const Navbar = (props: Props) => {
                         </div>
                     </div>
                     <p className="text-gray-900 text-base font-semibold">
-                        0x4dc...fb6a2
+                        {truncateAddress(wallet || "")}
                     </p>
                 </div>
                 {isActive &&
@@ -391,7 +446,7 @@ const Navbar = (props: Props) => {
                             </button>
                             <button onClick={() => {
                                 setIsActive(false)
-                                setConnected(false)
+                                handleDisconnect()
                             }} className="w-full text-left px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600">
                                 Disconnect
                             </button>
@@ -507,29 +562,35 @@ const Navbar = (props: Props) => {
                             </div>
                         </a>
                     </div>
+                    {/* {JSON.stringify(wallet)} */}
+                    {/* {JSON.stringify(balance)} */}
+                    {/* {JSON.stringify(isConnected)} */}
+                    {/* {JSON.stringify(showConnectButton)} */}
+                    {/* {JSON.stringify(showInstallMetamask)} */}
                     {
-                        connected ?
+                        wallet ?
                             (
                                 <div className="flex items-center">
                                     <nav className="text-gray-800 dark:text-white text-md lg:flex space-x-8 items-center hidden">
-                                        {/* <div className="flex items-center space-x-2">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="h-4 w-4 text-gray-600"
-                                    >
-                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                                    </svg>
-                                    <p className="text-base text-gray-600">-</p>
-                                </div>
-                                <div className="relative inline-block text-left">
+
+                                        <div className="flex items-center space-x-2">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                className="h-4 w-4 text-gray-600"
+                                            >
+                                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                            </svg>
+                                            <p className="text-base text-gray-600">-</p>
+                                        </div>
+                                        {/* <div className="relative inline-block text-left">
                                     <div>
                                         <button
                                             type="button"
@@ -570,9 +631,8 @@ const Navbar = (props: Props) => {
                                             aria-labelledby="options-menu"
                                         ></div>
                                     </div>
-                                </div> */}
+                                </div>  */}
                                         <ChainSelectMenu />
-
                                         <a
                                             href="https://trusting-lungfish-ebb.notion.site/Sekanson-FAQ-s-91f5d2700d764031a44c064ed49f8aec"
                                             target="_blank"
@@ -610,11 +670,47 @@ const Navbar = (props: Props) => {
                                         >
                                             Twitter
                                         </a>
-                                        <button onClick={() => {
-                                            setConnected(true)
-                                        }} className="py-1 px-2 flex text-ramppblue hover:text-white border-2 border-ramppblue rounded-md hover:bg-ramppdeepblue">
-                                            Launch a Project
-                                        </button>
+                                        {showConnectButton && (
+                                            <button
+                                                onClick={handleConnect}
+                                                className="py-1 px-2 flex items-center gap-x-2 text-ramppblue hover:text-white border-2 border-ramppblue rounded-md hover:bg-ramppdeepblue"
+                                            >
+                                                {status === "loading" && (
+                                                    <svg
+                                                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <circle
+                                                            className="opacity-25"
+                                                            cx="12"
+                                                            cy="12"
+                                                            r="10"
+                                                            stroke="currentColor"
+                                                            strokeWidth="4"
+                                                        ></circle>
+                                                        <path
+                                                            className="opacity-75"
+                                                            fill="currentColor"
+                                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                                        ></path>
+                                                    </svg>
+                                                )}
+                                                {status === "loading" ? "Loading" : "Launch Project"}
+                                            </button>
+                                        )}
+
+                                        {showInstallMetamask && (
+                                            <a href="https://metamask.io/"
+                                                rel="noreferrer"
+                                                target="_blank">
+                                                <button className="py-1 px-2 flex items-center gap-x-2 text-ramppblue hover:text-white border-2 border-ramppblue rounded-md hover:bg-ramppdeepblue">
+                                                    Connect Wallet
+                                                </button>
+                                            </a>
+                                        )}
+
                                     </nav>
 
                                     <MenuButton />
@@ -625,7 +721,6 @@ const Navbar = (props: Props) => {
 
                 </div>
             </header>
-
             <div className={
                 clsx(
                     "fixed opacity-0 flex justify-center z-30 w-full transition duration-200 ease-in-out justify-center bg-white rounded-lg",
