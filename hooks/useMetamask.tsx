@@ -1,12 +1,14 @@
 import React, { useEffect, type PropsWithChildren } from "react";
 
-type ConnectAction = { type: "connect"; wallet: string; balance: string };
+type ConnectAction = { type: "connect"; wallet: string; balance: string, web3: any };
 type DisconnectAction = { type: "disconnect" };
 type PageLoadedAction = {
     type: "pageLoaded";
     isMetamaskInstalled: boolean;
     wallet: string | null;
     balance: string | null;
+    web3: any;
+
 };
 type LoadingAction = { type: "loading" };
 type IdleAction = { type: "idle" };
@@ -29,7 +31,7 @@ type State = {
     isMetamaskInstalled: boolean;
     status: Status;
     balance: string | null;
-
+    web3: any;
 
 };
 
@@ -38,13 +40,15 @@ const initialState: State = {
     isMetamaskInstalled: false,
     status: "loading",
     balance: null,
+    web3: null
 } as const;
 
 function metamaskReducer(state: State, action: Action): State {
     switch (action.type) {
         case "connect": {
-            const { wallet, balance } = action;
-            const newState = { ...state, wallet, balance, status: "idle" } as State;
+            const { wallet, balance, web3 } = action;
+            console.log(wallet, web3, "---------------")
+            const newState = { ...state, wallet, balance, web3, status: "idle" } as State;
             const info = JSON.stringify(newState);
             window.localStorage.setItem("metamaskState", info);
 
@@ -58,8 +62,8 @@ function metamaskReducer(state: State, action: Action): State {
             return { ...state, wallet: null, balance: null };
         }
         case "pageLoaded": {
-            const { isMetamaskInstalled, balance, wallet } = action;
-            return { ...state, isMetamaskInstalled, status: "idle", wallet, balance };
+            const { isMetamaskInstalled, balance, wallet, web3 } = action;
+            return { ...state, isMetamaskInstalled, status: "idle", wallet, balance, web3 };
         }
         case "loading": {
             return { ...state, status: "loading" };
@@ -87,6 +91,8 @@ function MetamaskProvider({ children }: PropsWithChildren) {
         </MetamaskContext.Provider>
     );
 }
+
+
 
 function useMetamask() {
     const context = React.useContext(MetamaskContext);

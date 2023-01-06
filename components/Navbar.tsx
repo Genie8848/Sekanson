@@ -2,23 +2,24 @@ import { Listbox } from "@headlessui/react";
 import clsx from "clsx";
 import Link from "next/link";
 import React, { Fragment, useEffect, useState } from "react";
+import Web3 from "web3";
 import { useAppContext } from "../context/AppContext";
 import { useListen } from "../hooks/useListen";
 import { useMetamask } from "../hooks/useMetamask";
-import { AllChains } from "../libs/constants";
-import { truncateAddress } from "../utils/address";
-
+import { AllChains, getChainInfoByChainId } from "../libs/constants";
+import { hexToDecimal, truncateAddress } from "../utils/address";
 type Props = {};
 
 const Navbar = (props: Props) => {
     const { connected, setConnected, selectedChain, setSelectedChain } = useAppContext()
-    const { dispatch, state: { status, isMetamaskInstalled, wallet, balance }, } = useMetamask();
+    const { dispatch, state: { status, isMetamaskInstalled, wallet, balance, web3 }, } = useMetamask();
     const listen = useListen();
     const showInstallMetamask = status !== "pageNotLoaded" && !isMetamaskInstalled;
     const showConnectButton = status !== "pageNotLoaded" && isMetamaskInstalled && !wallet;
     const isConnected = status !== "pageNotLoaded" && typeof wallet === "string";
 
     const handleConnect = async () => {
+        let web3;
         dispatch({ type: "loading" });
         const accounts = await window.ethereum.request({
             method: "eth_requestAccounts",
@@ -29,8 +30,8 @@ const Navbar = (props: Props) => {
                 method: "eth_getBalance",
                 params: [accounts[0], "latest"],
             });
-
-            dispatch({ type: "connect", wallet: accounts[0], balance });
+            web3 = new Web3(window.ethereum as any);
+            dispatch({ type: "connect", wallet: accounts[0], balance, web3 });
 
             // we can register an event listener for changes to the users wallet
             listen();
@@ -42,6 +43,35 @@ const Navbar = (props: Props) => {
     };
 
     const [isMenuOpened, setIsMenuOpened] = useState(false)
+
+    useEffect(() => {
+        let web3;
+
+        if (typeof window !== undefined) {
+            // start by checking if window.ethereum is present, indicating a wallet extension
+            const ethereumProviderInjected = typeof window.ethereum !== "undefined";
+            // this could be other wallets so we can verify if we are dealing with metamask
+            // using the boolean constructor to be explecit and not let this be used as a falsy value (optional)
+            const isMetamaskInstalled =
+                ethereumProviderInjected && Boolean(window.ethereum.isMetaMask);
+
+            const local = window.localStorage.getItem("metamaskState");
+
+            // user was previously connected, start listening to MM
+            if (local) {
+                listen();
+            }
+
+            // local could be null if not present in LocalStorage
+            const { wallet, balance } = local ? JSON.parse(local) : // backup if local storage is empty
+                { wallet: null, balance: null };
+            web3 = new Web3(window.ethereum as any);
+
+            dispatch({ type: "pageLoaded", isMetamaskInstalled, wallet, balance, web3 });
+        }
+    }, []);
+
+
 
     // const ChainMenu = () => {
     //     <Menu>
@@ -285,6 +315,7 @@ const Navbar = (props: Props) => {
             </div>
         )
     }
+
     const ToolsWithExtraPopupMenu = () => {
         const [isActive, setIsActive] = useState(false)
         return (
@@ -357,31 +388,6 @@ const Navbar = (props: Props) => {
             </div>
         )
     }
-
-    useEffect(() => {
-        if (typeof window !== undefined) {
-            // start by checking if window.ethereum is present, indicating a wallet extension
-            const ethereumProviderInjected = typeof window.ethereum !== "undefined";
-            // this could be other wallets so we can verify if we are dealing with metamask
-            // using the boolean constructor to be explecit and not let this be used as a falsy value (optional)
-            const isMetamaskInstalled =
-                ethereumProviderInjected && Boolean(window.ethereum.isMetaMask);
-
-            const local = window.localStorage.getItem("metamaskState");
-
-            // user was previously connected, start listening to MM
-            if (local) {
-                listen();
-            }
-
-            // local could be null if not present in LocalStorage
-            const { wallet, balance } = local ? JSON.parse(local) : // backup if local storage is empty
-                { wallet: null, balance: null };
-
-            dispatch({ type: "pageLoaded", isMetamaskInstalled, wallet, balance });
-        }
-    }, []);
-
 
     const ProfilePopupMenu = () => {
         const [isActive, setIsActive] = useState(false)
@@ -457,6 +463,50 @@ const Navbar = (props: Props) => {
         )
     }
 
+    const switchNetwork = async (chainId: number) => {
+        console.log(web3, chainId, " is web3")
+        let currentChainId;
+        if (!web3) {
+            let web3 = new Web3(window.ethereum as any);
+            currentChainId = await web3.eth.getChainId();
+        } else {
+            currentChainId = await web3.eth.getChainId();
+        }
+        if (currentChainId != chainId) {
+            try {
+                console.log("naaaaaaaaaaaaaaaaaaa")
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: Web3.utils.toHex(chainId) }]
+                });
+                console.log(`switched to chainid : ${chainId} succesfully`);
+            } catch (err: any) {
+                console.log(`error occured while switching chain to chainId ${chainId}, err: ${err.message} code: ${err.code}`);
+                if (err.code === 4902) {
+                    console.log(`Error in adding`);
+                    addNetwork(getChainInfoByChainId(chainId));
+                }
+            }
+        }
+    }
+
+
+    const addNetwork = async (networkDetails: any) => {
+        try {
+            // console.log(networkDetails, networkMap.POLYGON_MAINNET, '---------nnnnnnnnnnnnn')
+            await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                    networkDetails,
+                    // networkMap.MUMBAI_TESTNET,
+                    // networkMap.POLYGON_MAINNET
+                ]
+            });
+        } catch (err: any) {
+            console.log(`error ocuured while adding new chain with chainId:${networkDetails.chainId}, err: ${err.message}`)
+        }
+    }
+
     const ChainSelectMenu = () => {
         return (
             <div className="relative">
@@ -491,6 +541,7 @@ const Navbar = (props: Props) => {
                             >
                                 <button
                                     type="button"
+                                    onClick={() => switchNetwork(chain.chainInfo.chainId)}
                                     className="w-full px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 border-b border-transparent"
                                     role="menuitem"
                                 >
@@ -562,11 +613,6 @@ const Navbar = (props: Props) => {
                             </div>
                         </a>
                     </div>
-                    {/* {JSON.stringify(wallet)} */}
-                    {/* {JSON.stringify(balance)} */}
-                    {/* {JSON.stringify(isConnected)} */}
-                    {/* {JSON.stringify(showConnectButton)} */}
-                    {/* {JSON.stringify(showInstallMetamask)} */}
                     {
                         wallet ?
                             (
@@ -588,7 +634,7 @@ const Navbar = (props: Props) => {
                                             >
                                                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                                             </svg>
-                                            <p className="text-base text-gray-600">-</p>
+                                            <p className="text-base text-gray-600">{web3.utils.fromWei(balance, 'ether')}</p>
                                         </div>
                                         {/* <div className="relative inline-block text-left">
                                     <div>
