@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import Head from "next/head";
-import React, { ReactNode, Suspense } from "react";
+import React, { ReactNode } from "react";
 import { WithChildren } from "../types/common";
 import Footer from "./Footer";
 import { LoaderLarge } from "./Loaders";
 import Navbar from "./Navbar";
-;
+
 interface LayoutProps extends WithChildren {
     sidebar?: ReactNode;
 }
@@ -26,9 +26,7 @@ const BaseLayout = ({ children }: LayoutProps) => {
             >
                 <Navbar />
                 <div className="min-h-[70vh]">
-                    <Suspense fallback={<LoaderLarge />} >
-                        {children}
-                    </Suspense>
+                    {children}
                 </div>
                 <Footer />
             </main>

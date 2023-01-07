@@ -5,11 +5,11 @@ import { MetamaskProvider } from '../hooks/useMetamask';
 
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <div className=''>
+  return (
     <AppContextWrapper >
       <MetamaskProvider>
         <Component {...pageProps} />
       </MetamaskProvider>
     </AppContextWrapper>
-  </div>
+  )
 }

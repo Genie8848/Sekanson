@@ -1,3 +1,5 @@
+"use client"
+
 import { createContext, Dispatch, SetStateAction, useContext, useMemo, useState } from "react";
 import { projectsData } from "../libs/projects";
 
@@ -10,6 +12,8 @@ interface IGlobalContextProps {
   setSelectedChain: Dispatch<SetStateAction<any>>;
   setLoading: Dispatch<SetStateAction<any>>;
   setProjects: Dispatch<SetStateAction<any>>
+  currentChainId: any,
+  setCurrentChainId: Dispatch<SetStateAction<any>>
 }
 
 export const AppContext = createContext<IGlobalContextProps>({
@@ -25,7 +29,9 @@ export const AppContext = createContext<IGlobalContextProps>({
   },
   setLoading: () => { },
   setProjects: () => { },
-  projects: []
+  projects: [],
+  currentChainId: null,
+  setCurrentChainId: () => { }
 
 });
 
@@ -39,6 +45,8 @@ export function AppContextWrapper({ children }: any) {
     alt: "Ethereum chain",
   })
 
+  const [currentChainId, setCurrentChainId] = useState(1)
+
   // projects
 
   const [projects, setProjects] = useState(projectsData)
@@ -51,9 +59,13 @@ export function AppContextWrapper({ children }: any) {
     selectedChain,
     setSelectedChain,
     projects,
-    setProjects
+    setProjects,
+    currentChainId,
+    setCurrentChainId
 
-  }), [connected, isLoading, selectedChain, projects])
+  }), [connected, isLoading, selectedChain, projects, currentChainId])
+
+
 
   return (
     <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>

@@ -6,20 +6,20 @@ import Web3 from "web3";
 import { useAppContext } from "../context/AppContext";
 import { useListen } from "../hooks/useListen";
 import { useMetamask } from "../hooks/useMetamask";
-import { AllChains, getChainInfoByChainId } from "../libs/constants";
+import { AllChains, getChainByChainId, getChainInfoByChainId } from "../libs/constants";
+import web3 from "../libs/getWeb3";
 import { hexToDecimal, truncateAddress } from "../utils/address";
 type Props = {};
 
 const Navbar = (props: Props) => {
-    const { connected, setConnected, selectedChain, setSelectedChain } = useAppContext()
-    const { dispatch, state: { status, isMetamaskInstalled, wallet, balance, web3 }, } = useMetamask();
+    const { currentChainId, setCurrentChainId } = useAppContext()
+    const { dispatch, state: { status, isMetamaskInstalled, wallet, balance }, } = useMetamask();
     const listen = useListen();
     const showInstallMetamask = status !== "pageNotLoaded" && !isMetamaskInstalled;
     const showConnectButton = status !== "pageNotLoaded" && isMetamaskInstalled && !wallet;
     const isConnected = status !== "pageNotLoaded" && typeof wallet === "string";
 
     const handleConnect = async () => {
-        let web3;
         dispatch({ type: "loading" });
         const accounts = await window.ethereum.request({
             method: "eth_requestAccounts",
@@ -30,8 +30,9 @@ const Navbar = (props: Props) => {
                 method: "eth_getBalance",
                 params: [accounts[0], "latest"],
             });
-            web3 = new Web3(window.ethereum as any);
-            dispatch({ type: "connect", wallet: accounts[0], balance, web3 });
+
+            console.log("nati ", accounts, balance)
+            dispatch({ type: "connect", wallet: accounts[0], balance });
 
             // we can register an event listener for changes to the users wallet
             listen();
@@ -45,9 +46,7 @@ const Navbar = (props: Props) => {
     const [isMenuOpened, setIsMenuOpened] = useState(false)
 
     useEffect(() => {
-        let web3;
-
-        if (typeof window !== undefined) {
+        if (typeof window !== "undefined") {
             // start by checking if window.ethereum is present, indicating a wallet extension
             const ethereumProviderInjected = typeof window.ethereum !== "undefined";
             // this could be other wallets so we can verify if we are dealing with metamask
@@ -65,9 +64,12 @@ const Navbar = (props: Props) => {
             // local could be null if not present in LocalStorage
             const { wallet, balance } = local ? JSON.parse(local) : // backup if local storage is empty
                 { wallet: null, balance: null };
-            web3 = new Web3(window.ethereum as any);
-
-            dispatch({ type: "pageLoaded", isMetamaskInstalled, wallet, balance, web3 });
+            const getChainId = async () => {
+                const chainId = await web3.eth.getChainId();
+                setCurrentChainId(chainId);
+            }
+            getChainId()
+            dispatch({ type: "pageLoaded", isMetamaskInstalled, wallet, balance });
         }
     }, []);
 
@@ -464,27 +466,23 @@ const Navbar = (props: Props) => {
     }
 
     const switchNetwork = async (chainId: number) => {
-        console.log(web3, chainId, " is web3")
-        let currentChainId;
-        if (!web3) {
-            let web3 = new Web3(window.ethereum as any);
-            currentChainId = await web3.eth.getChainId();
-        } else {
-            currentChainId = await web3.eth.getChainId();
-        }
-        if (currentChainId != chainId) {
-            try {
-                console.log("naaaaaaaaaaaaaaaaaaa")
-                await window.ethereum.request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: Web3.utils.toHex(chainId) }]
-                });
-                console.log(`switched to chainid : ${chainId} succesfully`);
-            } catch (err: any) {
-                console.log(`error occured while switching chain to chainId ${chainId}, err: ${err.message} code: ${err.code}`);
-                if (err.code === 4902) {
-                    console.log(`Error in adding`);
-                    addNetwork(getChainInfoByChainId(chainId));
+        if (typeof window !== "undefined") {
+            if (currentChainId !== chainId) {
+                try {
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: Web3.utils.toHex(chainId) }]
+                    });
+                    listen();
+
+                    setCurrentChainId(chainId)
+                    console.log(`switched to chainid : ${chainId} succesfully`);
+                } catch (err: any) {
+                    console.log(`error occured while switching chain to chainId ${chainId}, err: ${err.message} code: ${err.code}`);
+                    if (err.code === 4902) {
+                        console.log(`Error in adding`);
+                        addNetwork(getChainInfoByChainId(chainId));
+                    }
                 }
             }
         }
@@ -493,38 +491,40 @@ const Navbar = (props: Props) => {
 
     const addNetwork = async (networkDetails: any) => {
         try {
-            // console.log(networkDetails, networkMap.POLYGON_MAINNET, '---------nnnnnnnnnnnnn')
             await window.ethereum.request({
                 method: 'wallet_addEthereumChain',
                 params: [
                     networkDetails,
-                    // networkMap.MUMBAI_TESTNET,
-                    // networkMap.POLYGON_MAINNET
                 ]
             });
+            setCurrentChainId(networkDetails.chainId)
         } catch (err: any) {
-            console.log(`error ocuured while adding new chain with chainId:${networkDetails.chainId}, err: ${err.message}`)
+            console.log(`error occured while adding new chain with chainId:${networkDetails.chainId}, err: ${err.message}`)
         }
     }
 
     const ChainSelectMenu = () => {
+        const currentChain = getChainByChainId(currentChainId)
         return (
             <div className="relative">
                 <Listbox
-                    value={selectedChain} onChange={setSelectedChain}>
+                    value={currentChainId} onChange={(data) => {
+                        console.log(data.chainInfo.chainId, "selected Chain")
+                    }}>
                     <Listbox.Button
                         type="button"
-                        className="w-full flex items-center px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 border-b border-transparent border border-gray-300 bg-white flex items-center justify-between w-full rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-0 focus:ring-offset-0 w-max"
+                        className="w-full flex items-center px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 border-b border-transparent border border-gray-300 bg-white justify-between w-full rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-0 focus:ring-offset-0 w-max"
                     >
                         <div className="flex space-x-2 items-center w-fit">
                             <img
-                                alt={selectedChain.alt}
-                                src={selectedChain.img}
+                                alt={currentChain.alt}
+                                src={currentChain.img}
                                 className="h-4 w-4"
                             />
                             <p className="font-semibold text-gray-700">
-                                {selectedChain.title}
+                                {currentChain.title}
                             </p>
+
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 h-4 w-4">
                             <polyline points="6 9 12 15 18 9">
@@ -630,11 +630,21 @@ const Navbar = (props: Props) => {
                                                 strokeWidth="2"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                className="h-4 w-4 text-gray-600"
+                                                className={
+                                                    clsx(
+                                                        "h-4 w-4 text-gray-600",
+                                                        balance !== null && "text-green-500"
+                                                    )
+                                                }
                                             >
                                                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                                             </svg>
-                                            <p className="text-base text-gray-600">{web3.utils.fromWei(balance, 'ether')}</p>
+                                            <p className={
+                                                clsx(
+                                                    "text-base text-gray-600",
+                                                    balance !== null ? "text-green-400" : "text-gray-600"
+                                                )
+                                            }>{web3.utils.fromWei(balance || "", 'ether')}</p>
                                         </div>
                                         {/* <div className="relative inline-block text-left">
                                     <div>
@@ -723,7 +733,7 @@ const Navbar = (props: Props) => {
                                             >
                                                 {status === "loading" && (
                                                     <svg
-                                                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                                                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-ramppblue hover:text-white"
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         fill="none"
                                                         viewBox="0 0 24 24"

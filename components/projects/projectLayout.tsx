@@ -447,9 +447,7 @@ const ProjectLayout = ({ children, selectedNetwork }: LayoutProps) => {
                 </div>
             </div>
             <div className="w-4/5 xl:5/6 h-auto bg-white rounded-lg">
-                <Suspense fallback={<LoaderLarge />} >
-                    {children}
-                </Suspense>
+                {children}
             </div>
         </div>
     )
