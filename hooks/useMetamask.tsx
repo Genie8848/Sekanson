@@ -1,13 +1,14 @@
-import React, { useEffect, type PropsWithChildren } from "react";
+"use client"
 
-type ConnectAction = { type: "connect"; wallet: string; balance: string, web3: any };
+import React, { type PropsWithChildren } from "react";
+
+type ConnectAction = { type: "connect"; wallet: string; balance: string };
 type DisconnectAction = { type: "disconnect" };
 type PageLoadedAction = {
     type: "pageLoaded";
     isMetamaskInstalled: boolean;
     wallet: string | null;
     balance: string | null;
-    web3: any;
 
 };
 type LoadingAction = { type: "loading" };
@@ -31,7 +32,6 @@ type State = {
     isMetamaskInstalled: boolean;
     status: Status;
     balance: string | null;
-    web3: any;
 
 };
 
@@ -40,30 +40,34 @@ const initialState: State = {
     isMetamaskInstalled: false,
     status: "loading",
     balance: null,
-    web3: null
 } as const;
 
 function metamaskReducer(state: State, action: Action): State {
     switch (action.type) {
         case "connect": {
-            const { wallet, balance, web3 } = action;
-            console.log(wallet, web3, "---------------")
-            const newState = { ...state, wallet, balance, web3, status: "idle" } as State;
-            const info = JSON.stringify(newState);
-            window.localStorage.setItem("metamaskState", info);
-
-            return newState;
+            const { wallet, balance } = action;
+            console.log(wallet, state, "---------------")
+            if (typeof window !== "undefined") {
+                const newState = { ...state, wallet, balance, status: "idle" } as State;
+                console.log(newState, " is new state")
+                const info = JSON.stringify(newState);
+                window.localStorage.setItem("metamaskState", info);
+                return newState;
+            }
+            return state
         }
         case "disconnect": {
-            window.localStorage.removeItem("metamaskState");
-            if (typeof window.ethereum !== undefined) {
-                window.ethereum.removeAllListeners(["accountsChanged"]);
+            if (typeof window !== "undefined") {
+                window.localStorage.removeItem("metamaskState");
+                if (typeof window.ethereum !== "undefined") {
+                    window.ethereum.removeAllListeners(["accountsChanged"]);
+                }
             }
-            return { ...state, wallet: null, balance: null };
+            return { ...state, wallet: null, balance: null, };
         }
         case "pageLoaded": {
-            const { isMetamaskInstalled, balance, wallet, web3 } = action;
-            return { ...state, isMetamaskInstalled, status: "idle", wallet, balance, web3 };
+            const { isMetamaskInstalled, balance, wallet } = action;
+            return { ...state, isMetamaskInstalled, status: "idle", wallet, balance };
         }
         case "loading": {
             return { ...state, status: "loading" };

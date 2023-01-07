@@ -223,9 +223,10 @@ export const AllChains: Array<any> = [
         color: "indigo",
         alt: "Polygon chain",
         chainInfo: {
-            name: "Polygon Mainnet",
             chain: "Polygon",
             icon: "polygon",
+            name: "Matic(Polygon) Mainnet",
+            explorers: ["https://www.polygonscan.com/"],
             rpc: [
                 "https://polygon-rpc.com/",
                 "https://rpc-mainnet.matic.network",
@@ -246,13 +247,13 @@ export const AllChains: Array<any> = [
             chainId: 137,
             networkId: 137,
             slip44: 966,
-            explorers: [
-                {
-                    name: "polygonscan",
-                    url: "https://polygonscan.com",
-                    standard: "EIP3091",
-                },
-            ],
+            // explorers: [
+            //     {
+            //         name: "polygonscan",
+            //         url: "https://polygonscan.com",
+            //         standard: "EIP3091",
+            //     },
+            // ],
         },
     },
     {
@@ -313,13 +314,13 @@ export const AllChains: Array<any> = [
             shortName: "oeth",
             chainId: 10,
             networkId: 10,
-            explorers: [
-                {
-                    name: "etherscan",
-                    url: "https://optimistic.etherscan.io",
-                    standard: "EIP3091",
-                },
-            ],
+            // explorers: [
+            //     {
+            //         name: "etherscan",
+            //         url: "https://optimistic.etherscan.io",
+            //         standard: "EIP3091",
+            //     },
+            // ],
         },
     },
     {
@@ -369,18 +370,18 @@ export const AllChains: Array<any> = [
                 "https://arb1.arbitrum.io/rpc",
             ],
             faucets: [],
-            explorers: [
-                {
-                    name: "Arbiscan",
-                    url: "https://arbiscan.io",
-                    standard: "EIP3091",
-                },
-                {
-                    name: "Arbitrum Explorer",
-                    url: "https://explorer.arbitrum.io",
-                    standard: "EIP3091",
-                },
-            ],
+            // explorers: [
+            //     {
+            //         name: "Arbiscan",
+            //         url: "https://arbiscan.io",
+            //         standard: "EIP3091",
+            //     },
+            //     {
+            //         name: "Arbitrum Explorer",
+            //         url: "https://explorer.arbitrum.io",
+            //         standard: "EIP3091",
+            //     },
+            // ],
             infoURL: "https://arbitrum.io",
             parent: {
                 type: "L2",
@@ -403,43 +404,25 @@ export const AllChains: Array<any> = [
         img: "/images/arbitrum-logo.svg",
         alt: "Arbitrum chain",
         chainInfo: {
-            name: "Arbitrum Rinkeby",
+            name: "Arbitrum Görli",
             title: "Arbitrum Testnet Rinkeby",
-            chainId: 421611,
+            chainId: 421613,
             shortName: "arb-rinkeby",
             chain: "ETH",
-            networkId: 421611,
+            networkId: 421613,
             nativeCurrency: {
-                name: "Arbitrum Rinkeby Ether",
+                name: "Arbitrum Görli Ether",
                 symbol: "ETH",
                 decimals: 18,
             },
-            rpc: ["https://rinkeby.arbitrum.io/rpc"],
+            rpc: ["https://goerli-rollup.arbitrum.io/rpc/",],
             faucets: [
                 "http://fauceth.komputing.org?chain=421611&address=${ADDRESS}",
             ],
             infoURL: "https://arbitrum.io",
             explorers: [
-                {
-                    name: "arbiscan-testnet",
-                    url: "https://testnet.arbiscan.io",
-                    standard: "EIP3091",
-                },
-                {
-                    name: "arbitrum-rinkeby",
-                    url: "https://rinkeby-explorer.arbitrum.io",
-                    standard: "EIP3091",
-                },
+                "https://goerli-rollup-explorer.arbitrum.io"
             ],
-            parent: {
-                type: "L2",
-                chain: "eip155-4",
-                bridges: [
-                    {
-                        url: "https://bridge.arbitrum.io",
-                    },
-                ],
-            },
         },
     },
     {
@@ -501,11 +484,11 @@ export const AllChains: Array<any> = [
             infoURL: "https://cchain.explorer.avax-test.network",
             shortName: "Fuji",
             chainId: 43113,
-            networkId: 1,
+            networkId: 43113,
             explorers: [
                 {
                     name: "snowtrace",
-                    url: "https://testnet.snowtrace.io",
+                    url: "https://snowtrace.io",
                     standard: "EIP3091",
                 },
             ],
@@ -514,9 +497,9 @@ export const AllChains: Array<any> = [
 
     {
         id: "11",
-        title: "BNB Mainnet chain",
+        title: "BNB Mainnet",
         style: {
-            filter: "sepia(100%)",
+            filter: "sepia(0%)",
         },
         img: "/images/bnb-logo.svg",
         chainInfo: {
@@ -560,7 +543,7 @@ export const AllChains: Array<any> = [
     },
     {
         id: "12",
-        title: "BNB Testnet chain",
+        title: "BNB Testnet",
         style: {
             filter: "sepia(100%)",
         },
@@ -603,7 +586,7 @@ export const getChainInfoByChainId = (chainId: number) => {
     const chainData = AllChains.find(chain => chain.chainInfo.chainId === chainId).chainInfo
     const chainInfo = {
         chainId: Web3.utils.toHex(chainId), // '0x89'
-        chainName: chainData.title,
+        chainName: chainData.name,
         nativeCurrency: chainData.nativeCurrency,
         rpcUrls: chainData.rpc,
         blockExplorerUrls: chainData.explorers,
@@ -611,3 +594,9 @@ export const getChainInfoByChainId = (chainId: number) => {
     console.log(chainId, chainData, chainInfo, "ffffffffffffff")
     return chainInfo
 }
+
+export const getChainByChainId = (chainId: number) => {
+    const chainData = AllChains.find(chain => chain.chainInfo.chainId === chainId)
+    return chainData
+}
+
