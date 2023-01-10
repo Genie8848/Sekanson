@@ -1,17 +1,17 @@
 "use client"
 
 import { createContext, Dispatch, SetStateAction, useContext, useMemo, useState } from "react";
-import { projectsData } from "../libs/projects";
+import { projectsData as project_data } from "../libs/projects";
 
 interface IGlobalContextProps {
   connected: any;
-  projects: any;
+  projectsData: any;
   loading: boolean;
   selectedChain: any;
   setConnected: Dispatch<SetStateAction<any>>;
   setSelectedChain: Dispatch<SetStateAction<any>>;
   setLoading: Dispatch<SetStateAction<any>>;
-  setProjects: Dispatch<SetStateAction<any>>
+  setProjectsData: Dispatch<SetStateAction<any>>
   currentChainId: any,
   setCurrentChainId: Dispatch<SetStateAction<any>>
 }
@@ -28,8 +28,8 @@ export const AppContext = createContext<IGlobalContextProps>({
     alt: "Ethereum chain",
   },
   setLoading: () => { },
-  setProjects: () => { },
-  projects: [],
+  setProjectsData: () => { },
+  projectsData: [],
   currentChainId: null,
   setCurrentChainId: () => { }
 
@@ -49,7 +49,7 @@ export function AppContextWrapper({ children }: any) {
 
   // projects
 
-  const [projects, setProjects] = useState(projectsData)
+  const [projectsData, setProjectsData] = useState(project_data)
 
   let sharedState: IGlobalContextProps = useMemo(() => ({
     connected,
@@ -58,12 +58,12 @@ export function AppContextWrapper({ children }: any) {
     setLoading: setIsLoading,
     selectedChain,
     setSelectedChain,
-    projects,
-    setProjects,
+    projectsData,
+    setProjectsData,
     currentChainId,
     setCurrentChainId
 
-  }), [connected, isLoading, selectedChain, projects, currentChainId])
+  }), [connected, isLoading, selectedChain, , currentChainId, projectsData])
 
 
 

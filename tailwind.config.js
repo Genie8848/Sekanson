@@ -22,6 +22,7 @@ module.exports = {
         rampporange: "rgba(209, 89, 70, 1)",
         darkgray: "rgba(105, 105, 105, 1)",
         frosted: "hsla(0,0%,100%,.9)",
+        greylight: "#e9e9ea",
       },
     },
   },

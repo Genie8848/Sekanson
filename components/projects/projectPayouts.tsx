@@ -86,265 +86,64 @@ const ProjectPayouts = (props: Props) => {
         <ProjectLayout selectedNetwork={selectedNetwork} >
             <div className="container w-full h-full p-6 relative">
                 <div className="flex flex-col sticky top-0 bg-frosted z-10 flex-shrink py-2">
-                    <div className="flex items-center space-x-10">
-                        <h1 className="text-5xl font-black text-gray-700">
-                            Payout Page
-                        </h1>
+                    <div className="flex items-center space-x-10 ">
+                        <h1 className="text-5xl font-black text-gray-700">Project Payouts</h1>
                     </div>
-                    <p className="my-2 text-gray-800">
-                        All contracts are ERC-721A, audited, and based on the ERC-721
-                        Open Zeppelin standard.
+                    <p className="my-2 text-gray-800">This is the list of addresses who will be paid out from your contract.<br />You can withdraw the ETH in your contract at any time and it will be paid out according to the table defined here.
                     </p>
                 </div>
                 <div className="flex flex-col space-y-4">
-                    <div
-                        className="__react_component_tooltip te504dc78-2b63-4f53-9c70-c252d1b80db1 place-top type-dark"
-                        id="te504dc78-2b63-4f53-9c70-c252d1b80db1"
-                        data-id="tooltip"
-                        style={{ left: "111px", top: "195px" }}
-                    >
-                        This is the token symbol for your projects token. It cannot be
-                        changed after deployment.
-                    </div>
-                    <div className="relative w-3/4 my-4">
-                        <div
-                            className="w-fit flex items-center space-x-2 cursor-pointer"
-                            data-tip="This is the network that you contract will be deployed on. This cannot be changed after deployment"
-                        >
-                            <label className="text-base font-black uppercase text-gray-500">
-                                Network
-                            </label>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="h-4 w-4 text-gray-500"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </div>
-                        <div className="my-3 w-full grid grid-cols-3 gap-4 items-center ">
-                            <NetworkOption />
-                        </div>
-                    </div>
-                    <div className="flex flex-col">
-                        <div
-                            className="w-fit flex items-center space-x-2 cursor-pointer"
-                            data-tip="This is the name of your project. It will appear on NFT marketplaces. It cannot be changed after deployment."
-                        >
-                            <label className="text-base font-black uppercase text-gray-500">
-                                Name
-                            </label>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="h-4 w-4 text-gray-500"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </div>
-                        <input
-                            name="name"
-                            type="text"
-                            className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black"
-                            autoComplete="off"
-                            placeholder="Your Project Name"
-                            value="My Sekanson Project"
-                        />
-                    </div>
-                    <div className="flex flex-col">
-                        <div
-                            className="w-fit flex items-center space-x-2 cursor-pointer"
-                            data-tip="This is the token symbol for your projects token. It cannot be changed after deployment."
-                        >
-                            <label className="text-base font-black uppercase text-gray-500">
-                                Token Symbol
-                            </label>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="h-4 w-4 text-gray-500"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </div>
-                        <input
-                            name="tokenSymbol"
-                            type="text"
-                            className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black"
-                            autoComplete="off"
-                            placeholder="RAMPP"
-                            value="MINTPLEX"
-                        />
-                    </div>
-                    <div className="flex flex-col">
-                        <div
-                            className="w-fit flex items-center space-x-2 cursor-pointer"
-                            data-tip="This is the description of your project. You can change it anytime."
-                        >
-                            <label className="text-base font-black uppercase text-gray-500">
-                                Description
-                            </label>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="h-4 w-4 text-gray-500"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </div>
-                        <textarea
-                            name="description"
-                            className="my-2 w-1/2 p-2 rounded-lg border-2 border-gray-300 text-gray-700 text-base font-base "
-                            autoComplete="off"
-                            placeholder="Some details about your project"
-                        ></textarea>
-                    </div>
-                    <div className="flex flex-col">
-                        <div
-                            className="w-fit flex items-center space-x-2 cursor-pointer"
-                            data-tip="This is the % royalties you will collect on secondary sales"
-                        >
-                            <label className="text-base font-black uppercase text-gray-500">
-                                Royalties
-                            </label>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="h-4 w-4 text-gray-500"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <div className="flex flex-col">
-                                <input
-                                    name="sellerFeeBasisPoints"
-                                    type="number"
-                                    min="0"
-                                    max="10"
-                                    className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black"
-                                    autoComplete="off"
-                                    placeholder="5.0"
-                                    value="0"
-                                />
-                            </div>
-                            <p className="text-3xl text-gray-500 font-black">%</p>
-                        </div>
-                    </div>
-                    <div className="flex flex-col">
-                        <div
-                            className="w-fit flex items-center space-x-2 cursor-pointer"
-                            data-tip="This is the URL in which minters can learn more about your project."
-                        >
-                            <label className="text-base font-black uppercase text-gray-500">
-                                Website
-                            </label>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="h-4 w-4 text-gray-500"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </div>
-                        <input
-                            name="website"
-                            type="url"
-                            className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black"
-                            autoComplete="off"
-                            placeholder="https://myproject.com"
-                            value=""
-                        />
-                    </div>
-                    <div className="flex flex-col">
-                        <div
-                            className="w-fit flex items-center space-x-2 cursor-pointer"
-                            data-tip="This is the URL in which minters can learn more about your project."
-                        >
-                            <label className="text-base font-black uppercase text-gray-500">
-                                Twitter Handle
-                            </label>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="h-4 w-4 text-gray-500"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </div>
-                        <input
-                            name="twitter"
-                            type="url"
-                            className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black "
-                            autoComplete="off"
-                            placeholder="@sekansonnft"
-                            value=""
-                        />
-                    </div>
-                </div>
+                    <div className="w-fit p-4 rounded-lg border border-blue-700 text-blue-700 bg-blue-100 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-blue-700 mr-2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><p className="text-blue-600 text-md">You <b>CANNOT</b> modify these addresses or payouts once deployed!</p></div></div>
+                <table className="w-3/4 table p-4 border border-gray-200 rounded-lg mt-5">
+                    <thead>
+                        <tr>
+                            <th className="border-b-2 p-4 text-3xl whitespace-nowrap font-heavy text-gray-700">ETH Address</th>
+                            <th className="border-b-2 p-4 text-3xl whitespace-nowrap font-normal text-gray-700"></th>
+                            <th className="border-b-2 p-4 whitespace-nowrap font-normal text-gray-700"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className="text-gray-700">
+                            <td className="border-b-2 p-4 text-left">
+                                <div className="flex flex-col">
+                                    <p className="text-2xl font-semibold text-gray-700 ">mintplex.eth</p>
+                                    <p className="text-xs text-gray-700 italic">Mintplex takes no fees on primary or secondary sales!
+                                    </p>
+                                </div>
+                            </td>
+                            <td className="border-b-2 p-4 text-2xl font-semibold text-gray-700 text-left">0%</td>
+                            <td className="border-b-2 p-4 dark:border-dark-5 text-center">
+                            </td>
+                        </tr>
+                        <tr className="text-gray-700">
+                            <td className="border-b-2 p-2  text-center">
+                                <input type="text" className="w-full text-2xl font-semibold text-gray-700 text-left"
+                                    autoComplete="off" placeholder=""
+                                    value="0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3" />
+                            </td>
+                            <td className="border-b-2 p-2 text-left">
+                                <div className="flex items-center">
+                                    <input type="number" min="1" max="100" className="w-14 text-2xl font-semibold text-gray-700 text-left" autoComplete="off" placeholder="" value="100" />
+                                    <p className="text-2xl font-semibold text-gray-700 text-center">%</p>
+                                </div>
+                            </td>
+                            <td className="border-b-2 p-2 dark:border-dark-5 text-center">
+                            </td>
+                        </tr>
+                        <tr className="text-gray-700">
+                            <td colSpan={3} className="border-b-2 p-4 dark:border-dark-5 text-center">
+                                <button className=" mx-auto p-2 border border-gray-300 rounded-md hover:bg-gray-100 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 mx-1">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                    </svg>Add payout address
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </ProjectLayout>
     );

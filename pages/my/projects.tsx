@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import BaseLayout from "../../components/BaseLayout";
 import NewProjectModal from "../../components/NewProjectModal";
+import ApplicationList from "../../components/projects/ApplicationList";
 import ProjectsList from "../../components/projects/ProjectsList";
 
 type Props = {};
@@ -65,6 +66,10 @@ const Projects = (props: Props) => {
                 </div>
                 <div className="w-full flex flex-wrap gap-x-4 gap-y-4">
                     <ProjectsList />
+                </div>
+               
+                <div className="w-full flex flex-wrap gap-x-4 gap-y-4">
+                    <ApplicationList />
                 </div>
             </div>
         </BaseLayout>
