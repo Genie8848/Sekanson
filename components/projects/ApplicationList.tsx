@@ -8,19 +8,18 @@ type Props = {
 
 const ApplicationList = (props: Props) => {
     const { applications, setApplications } = useAppContext()
+
     const handleDeleteApplication = async (id: string) => {
         try {
             const res = await deleteApplication(id)
             const filteredApps = applications.filter((app: any) => app.uid !== id)
             setApplications(filteredApps)
-            console.log(res, " is res")
         } catch (error) {
 
         }
     }
 
     const ApplicationItem = ({ application }: any) => {
-
         return (
             <div>
                 <div className="w-full mt-4 ">
