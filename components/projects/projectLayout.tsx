@@ -7,11 +7,62 @@ import { LoaderLarge } from "../Loaders";
 ;
 interface LayoutProps extends WithChildren {
     sidebar?: ReactNode;
-    selectedNetwork: any;
+    selectedNetwork?: any;
 }
+const networkChains = [
+    {
+        id: "1",
+        name: "Ethereum",
+        src: "/images/eth-logo.svg",
+        className:
+            "border-gray-300  border hover:border-gray-700 text-gray-300 hover:text-gray-700",
+        activeClass: "bg-gray-100 text-gray-700 border-gray-700",
+    },
+    {
+        id: "2",
+        name: "Polygon",
+        src: "/images/polygon-logo.svg",
+        className:
+            "border-indigo-300 hover:border-indigo-700 text-gray-300 hover:text-indigo-700",
+        activeClass: "border-indigo-700 bg-indigo-100 text-indigo-700 ",
+    },
+    {
+        id: "3",
+        name: "Optimism",
+        src: "/images/optimism-logo.svg",
+        className:
+            "border-red-300 hover:border-red-700 text-gray-300 hover:text-red-700",
+        activeClass: "border-red-700 text-red-700 bg-red-100",
+    },
+    {
+        id: "4",
+        name: "Arbitrum",
+        src: "/images/arbitrum-logo.svg",
+        className:
+            "border-blue-300 hover:border-blue-700 text-gray-300 hover:text-blue-700",
+        activeClass: "border-blue-700 text-blue-700 bg-blue-100",
+    },
+    {
+        id: "5",
+        name: "Avalanche",
+        src: "/images/avalanche-logo.svg",
+        className:
+            "border-red-300 hover:border-red-700 text-gray-300 hover:text-red-700",
+        activeClass: "border-red-700 text-red-700 bg-red-100",
+    },
+    {
+        id: "6",
+        name: "BNB Chain",
+        src: "/images/bnb-logo.svg",
+        className:
+            "border-yellow-300 hover:border-yellow-700 text-gray-300 hover:text-yellow-700",
+        activeClass: "border-yellow-700 text-yellow-700 bg-yellow-100",
+    },
+];
 
 const ProjectLayout = ({ children, selectedNetwork }: LayoutProps) => {
     const [collapseSettings, setCollapseSettings] = useState(false)
+    if (!selectedNetwork) selectedNetwork = networkChains[0]
     const router = useRouter()
     const activePath = router.pathname
 
