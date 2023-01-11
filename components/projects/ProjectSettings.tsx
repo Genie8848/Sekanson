@@ -232,14 +232,10 @@ const ProjectSettings = (props: Props) => {
                                 <line x1="12" y1="8" x2="12.01" y2="8"></line>
                             </svg>
                         </div>
-                        <input
-                            name="name"
-                            type="text"
+
+                        <input name="name" type="text"
                             className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black"
-                            autoComplete="off"
-                            placeholder="Your Project Name"
-                            value="My Sekanson Project"
-                        />
+                            autoComplete="off" placeholder="Your Project Name" defaultValue="My Mintplex Project"></input>
                     </div>
                     <div className="flex flex-col">
                         <div
@@ -272,7 +268,7 @@ const ProjectSettings = (props: Props) => {
                             className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black"
                             autoComplete="off"
                             placeholder="RAMPP"
-                            value="MINTPLEX"
+                            defaultValue="MINTPLEX"
                         />
                     </div>
                     <div className="flex flex-col">
@@ -342,7 +338,7 @@ const ProjectSettings = (props: Props) => {
                                     className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black"
                                     autoComplete="off"
                                     placeholder="5.0"
-                                    value="0"
+                                    defaultValue="0"
                                 />
                             </div>
                             <p className="text-3xl text-gray-500 font-black">%</p>
@@ -379,7 +375,7 @@ const ProjectSettings = (props: Props) => {
                             className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black"
                             autoComplete="off"
                             placeholder="https://myproject.com"
-                            value=""
+                            defaultValue=""
                         />
                     </div>
                     <div className="flex flex-col">
@@ -413,12 +409,12 @@ const ProjectSettings = (props: Props) => {
                             className="my-2 w-fit outline-none order-transparent focus:border-transparent focus:ring-0 border-0 border-color-transparent text-gray-700 text-3xl font-black "
                             autoComplete="off"
                             placeholder="@sekansonnft"
-                            value=""
+                            defaultValue=""
                         />
                     </div>
                 </div>
             </div>
-        </ProjectLayout>
+        </ProjectLayout >
     );
 };
 

@@ -134,7 +134,7 @@ const ProjectTeams = (props: Props) => {
                                                     stroke="currentColor"
                                                     strokeWidth="2"
                                                     strokeLinecap="round"
-                                                    stroke-Linejoin="round"
+                                                    strokeLinejoin="round"
                                                     className="ml-2 h-4 w-4"
                                                 >
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -170,7 +170,7 @@ const ProjectTeams = (props: Props) => {
                                                     stroke="currentColor"
                                                     strokeWidth="2"
                                                     strokeLinecap="round"
-                                                    stroke-Linejoin="round"
+                                                    strokeLinejoin="round"
                                                     className="ml-2 h-4 w-4"
                                                 >
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -196,7 +196,7 @@ const ProjectTeams = (props: Props) => {
                                             stroke="currentColor"
                                             strokeWidth="2"
                                             strokeLinecap="round"
-                                            stroke-Linejoin="round"
+                                            strokeLinejoin="round"
                                             className="h-4 mx-1"
                                         >
                                             <circle cx="12" cy="12" r="10"></circle>

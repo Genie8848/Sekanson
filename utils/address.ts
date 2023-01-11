@@ -13,5 +13,7 @@ export const toHex = (num: number) => {
 };
 export const hexToDecimal = (hex: string) => parseInt(hex, 16);
 
-export const fetcher = (...args: any) =>
-  fetch({ ...args }).then((res) => res.json());
+export const fetcher = (...args: any) => {
+  console.log(args, " if fetcher");
+  return fetch({ ...args }).then((res) => res.json());
+};

@@ -567,7 +567,7 @@ const Manage = (props: Props) => {
                             stroke="currentColor"
                             strokeWidth="2"
                             strokeLinecap="round"
-                            stroke-Linejoin="round"
+                            strokeLinejoin="round"
                             className="h-6 w-6 mr-2"
                         >
                             <circle cx="12" cy="12" r="10"></circle>

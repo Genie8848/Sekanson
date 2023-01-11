@@ -43,7 +43,7 @@ const PinataSetup = (props: Props) => {
                             stroke="currentColor"
                             stroke-width="2"
                             stroke-linecap="round"
-                            stroke-Linejoin="round"
+                            strokeLinejoin="round"
                             className="h-4"
                         >
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -102,7 +102,7 @@ const PinataSetup = (props: Props) => {
                             stroke="currentColor"
                             stroke-width="2"
                             stroke-linecap="round"
-                            stroke-Linejoin="round"
+                            strokeLinejoin="round"
                             className="h-4"
                         >
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -304,7 +304,7 @@ const PinataSetup = (props: Props) => {
                                 stroke="currentColor"
                                 stroke-width="2"
                                 stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinejoin="round"
                             >
                                 <polyline points="16 16 12 12 8 16"></polyline>
                                 <line x1="12" y1="12" x2="12" y2="21"></line>
@@ -355,7 +355,7 @@ const PinataSetup = (props: Props) => {
                             stroke="currentColor"
                             stroke-width="2"
                             stroke-linecap="round"
-                            stroke-Linejoin="round"
+                            strokeLinejoin="round"
                             className="h-4"
                         >
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -451,7 +451,7 @@ const PinataSetup = (props: Props) => {
                                             stroke="currentColor"
                                             stroke-width="2"
                                             stroke-linecap="round"
-                                            stroke-linejoin="round"
+                                            strokeLinejoin="round"
                                             className="text-green-600 h-4"
                                         >
                                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -480,7 +480,7 @@ const PinataSetup = (props: Props) => {
                                             stroke="currentColor"
                                             stroke-width="2"
                                             stroke-linecap="round"
-                                            stroke-linejoin="round"
+                                            strokeLinejoin="round"
                                             className="text-red-600 h-4"
                                         >
                                             <circle cx="12" cy="12" r="10"></circle>

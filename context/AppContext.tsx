@@ -14,6 +14,10 @@ interface IGlobalContextProps {
   setProjectsData: Dispatch<SetStateAction<any>>
   currentChainId: any,
   setCurrentChainId: Dispatch<SetStateAction<any>>
+  setProjects: Dispatch<SetStateAction<any>>,
+  setApplications: Dispatch<SetStateAction<any>>,
+  applications: any[],
+  projects: any[]
 }
 
 export const AppContext = createContext<IGlobalContextProps>({
@@ -31,7 +35,11 @@ export const AppContext = createContext<IGlobalContextProps>({
   setProjectsData: () => { },
   projectsData: [],
   currentChainId: null,
-  setCurrentChainId: () => { }
+  setCurrentChainId: () => { },
+  setProjects: () => { },
+  setApplications: () => { },
+  applications: [],
+  projects: []
 
 });
 
@@ -50,7 +58,8 @@ export function AppContextWrapper({ children }: any) {
   // projects
 
   const [projectsData, setProjectsData] = useState(project_data)
-
+  const [projects, setProjects] = useState([])
+  const [applications, setApplications] = useState([])
   let sharedState: IGlobalContextProps = useMemo(() => ({
     connected,
     loading: isLoading,
@@ -61,11 +70,14 @@ export function AppContextWrapper({ children }: any) {
     projectsData,
     setProjectsData,
     currentChainId,
-    setCurrentChainId
+    setCurrentChainId,
 
-  }), [connected, isLoading, selectedChain, , currentChainId, projectsData])
+    projects,
+    applications,
+    setProjects,
+    setApplications
 
-
+  }), [connected, isLoading, selectedChain, , currentChainId, projectsData, applications, projects])
 
   return (
     <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>

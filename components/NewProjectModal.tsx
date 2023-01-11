@@ -1,8 +1,11 @@
 import clsx from 'clsx'
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
+import { useAppContext } from '../context/AppContext'
+import { createNewApplication, createNewProject } from '../libs/api/projects'
 
 type Props = {
-    onClose: () => void
+    onClose: () => void,
+    setLoading: Dispatch<SetStateAction<any>>
 }
 
 enum ApplicationType {
@@ -12,6 +15,40 @@ enum ApplicationType {
 
 const NewProjectModal = (props: Props) => {
     const [applicationTab, setApplicationTab] = useState("LAUNCH_COMMUNITY")
+    const { setApplications, applications, projects, setProjects } = useAppContext()
+
+    const handleCreateNewApplication = async () => {
+        props.setLoading(true)
+        const formData = {
+            address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
+            applicationInfo: "shop_plugin"
+        }
+        const data = await createNewApplication(formData)
+        setTimeout(() => {
+            props.onClose()
+        }, 500);
+        setTimeout(() => {
+            setApplications((prev: any) => [...prev, data])
+            props.setLoading(false)
+        }, 1000)
+    }
+
+    const handleCreateNewProject = async (token_type: any) => {
+        const formData = {
+            address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
+            contractType: token_type
+        }
+        props.setLoading(true)
+        const data = await createNewProject(formData)
+        setTimeout(() => {
+            props.onClose()
+        }, 500);
+        setTimeout(() => {
+            setProjects((prev: any) => [...prev, data])
+            props.setLoading(false)
+        }, 1000)
+    }
+
 
     return (
         <div>
@@ -84,10 +121,10 @@ const NewProjectModal = (props: Props) => {
                                             </div>
                                             {
                                                 applicationTab === ApplicationType.LAUNCH_COMMUNITY ? (
-
-
                                                     <div className="w-full flex flex-col space-y-6 mt-2">
-                                                        <button className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
+                                                        <button
+                                                            onClick={() => handleCreateNewProject("ERC721A")}
+                                                            className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
                                                             <img
                                                                 alt="example of ERC721A project"
                                                                 src="/images/bayc-rotation.gif"
@@ -119,7 +156,9 @@ const NewProjectModal = (props: Props) => {
                                                                 </p>
                                                             </div>
                                                         </button>
-                                                        <button className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
+                                                        <button
+                                                            onClick={() => handleCreateNewProject("ERC1155")}
+                                                            className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
                                                             <img
                                                                 alt="example of ERC1155 project"
                                                                 src="/images/adidas-erc.gif"
@@ -145,7 +184,9 @@ const NewProjectModal = (props: Props) => {
                                                                 </p>
                                                             </div>
                                                         </button>
-                                                        <button className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
+                                                        <button
+                                                            onClick={() => handleCreateNewProject("ERC-20")}
+                                                            className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
                                                             <img
                                                                 alt="example of ERC-20 token"
                                                                 src="/images/erc20.gif"
@@ -174,7 +215,7 @@ const NewProjectModal = (props: Props) => {
                                                     </div>)
                                                     : (
                                                         <div className="w-full flex flex-col space-y-6 mt-4">
-                                                            <button className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
+                                                            <button onClick={handleCreateNewApplication} className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
                                                                 <img
                                                                     alt="shopify.com"
                                                                     src="/images/shop_other_application.png"
