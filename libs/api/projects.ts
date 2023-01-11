@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import { fetcher } from "../../utils/address";
 
 export const getApplications = async (formData: any) => {
@@ -6,30 +5,37 @@ export const getApplications = async (formData: any) => {
 
   const api_url = `/api/applications/find-by-address`;
   try {
-    const { applications } = await fetch(api_url, {
+    const res = await fetch(api_url, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((res) => res.json());
+    });
+    const { applications } = await res.json();
     return applications;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error, " is error getting applications");
+    return [];
+  }
 };
 
 export const getProjects = async (formData: any) => {
-  // const { address } = formData;
   const api_url = `/api/projects/find-by-address`;
   try {
-    const { projects } = await fetch(api_url, {
+    const res = await fetch(api_url, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((res) => res.json());
+    });
+    const { projects } = await res.json();
     return projects;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error, " is error in getting projects");
+    return [];
+  }
 };
 
 export const getApplicationById = async (id: any) => {
@@ -49,7 +55,10 @@ export const createNewApplication = async (formData: any) => {
       },
     }).then((res) => res.json());
     return application;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error, " is error");
+    return null;
+  }
 };
 
 export const createNewProject = async (formData: any) => {
@@ -62,7 +71,10 @@ export const createNewProject = async (formData: any) => {
       },
     }).then((res) => res.json());
     return project;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error, " is error");
+    return null;
+  }
 };
 
 export const deleteApplication = async (id: any) => {

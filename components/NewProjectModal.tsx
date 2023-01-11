@@ -15,22 +15,26 @@ enum ApplicationType {
 
 const NewProjectModal = (props: Props) => {
     const [applicationTab, setApplicationTab] = useState("LAUNCH_COMMUNITY")
-    const { setApplications, applications, projects, setProjects } = useAppContext()
+    const { setApplications, setProjects } = useAppContext()
 
     const handleCreateNewApplication = async () => {
-        props.setLoading(true)
-        const formData = {
-            address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
-            applicationInfo: "shop_plugin"
+        try {
+            props.setLoading(true)
+            const formData = {
+                address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
+                applicationInfo: "shop_plugin"
+            }
+            const data = await createNewApplication(formData)
+            setTimeout(() => {
+                props.onClose()
+            }, 500);
+            setTimeout(() => {
+                setApplications((prev: any) => [...prev, data])
+                props.setLoading(false)
+            }, 1000)
+        } catch (error) {
+            console.log("error is ", error)
         }
-        const data = await createNewApplication(formData)
-        setTimeout(() => {
-            props.onClose()
-        }, 500);
-        setTimeout(() => {
-            setApplications((prev: any) => [...prev, data])
-            props.setLoading(false)
-        }, 1000)
     }
 
     const handleCreateNewProject = async (token_type: any) => {
@@ -38,15 +42,19 @@ const NewProjectModal = (props: Props) => {
             address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
             contractType: token_type
         }
-        props.setLoading(true)
-        const data = await createNewProject(formData)
-        setTimeout(() => {
-            props.onClose()
-        }, 500);
-        setTimeout(() => {
-            setProjects((prev: any) => [...prev, data])
-            props.setLoading(false)
-        }, 1000)
+        try {
+            props.setLoading(true)
+            const data = await createNewProject(formData)
+            setTimeout(() => {
+                props.onClose()
+            }, 500);
+            setTimeout(() => {
+                setProjects((prev: any) => [...prev, data])
+                props.setLoading(false)
+            }, 1000)
+        } catch (error) {
+            console.log("error is ", error)
+        }
     }
 
 

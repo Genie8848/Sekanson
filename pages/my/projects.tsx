@@ -21,7 +21,7 @@ const Projects = (props: Props) => {
     const fetchApplications = useCallback(
         async () => {
             const formData = {
-                address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
+                address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3"
             }
             try {
 
@@ -45,7 +45,7 @@ const Projects = (props: Props) => {
     const fetchProjects = useCallback(
         async () => {
             const formData = {
-                address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
+                address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3"
             }
             try {
                 const projects = await getProjects(formData)
