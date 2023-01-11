@@ -86,7 +86,7 @@ const ProjectsList = (props: Props) => {
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
             {
-                projects.map((project: any, index: any) => {
+                projects && projects.map((project: any, index: any) => {
                     return <ProjectItem key={project.uid} project={project} />
                 })
             }

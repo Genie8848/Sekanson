@@ -1,5 +1,3 @@
-import { fetcher } from "../../utils/address";
-
 export const getChains = async () => {
   try {
     // const chains = await fetcher("https://chainid.network/chains.json");

@@ -23,8 +23,17 @@ const Projects = (props: Props) => {
             const formData = {
                 address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
             }
-            const applications = await getApplications(formData)
-            setApplications(applications)
+            try {
+
+                const applications = await getApplications(formData)
+                if (applications) {
+                    setApplications(applications)
+                    console.log("applications iss  ", applications)
+                }
+
+            } catch (error) {
+                console.log("error iss  ", error)
+            }
         },
         [],
     )
@@ -38,9 +47,15 @@ const Projects = (props: Props) => {
             const formData = {
                 address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
             }
-            const projects = await getProjects(formData)
-            console.log("data iss  ", projects)
-            setProjects(projects)
+            try {
+                const projects = await getProjects(formData)
+                if (projects) {
+                    setProjects(projects)
+                    console.log("data iss  ", projects)
+                }
+            } catch (error) {
+                console.log("error iss  ", error)
+            }
         },
         [],
     )
