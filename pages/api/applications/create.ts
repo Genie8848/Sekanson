@@ -1,11 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import {
+  getApplications,
+  updateApplications,
+} from "../../../libs/api/mock_api";
 import { getRandomString } from "../../../utils/numberUtils";
-import { applications, application } from "../hello";
+import { application } from "../hello";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const applications: any[] = getApplications();
   switch (req.method) {
     case "GET": {
       let { page = "1", limit = "10000" }: any = req.query;
@@ -26,7 +31,7 @@ export default async function handler(
           ...application,
           uid: getRandomString(),
         };
-        applications.push(newApplication);
+        updateApplications([...applications, newApplication]);
         return res.status(201).json({ application: newApplication });
       } catch (error) {
         console.log(error);

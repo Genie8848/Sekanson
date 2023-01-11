@@ -1,11 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getProjects, updateProjects } from "../../../libs/api/mock_api";
 import { getRandomString } from "../../../utils/numberUtils";
-import { projects, project } from "../hello";
+import { project } from "../hello";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const projects: any[] = getProjects();
+
   switch (req.method) {
     case "GET": {
       let { page = "1", limit = "10000" }: any = req.query;
@@ -27,6 +30,7 @@ export default async function handler(
           uid: getRandomString(),
         };
         projects.push(newProject);
+        updateProjects(projects);
         return res.status(201).json({ data: newProject });
       } catch (error) {
         console.log(error);

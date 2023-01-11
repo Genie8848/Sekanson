@@ -1,10 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { applications, setApplications } from "../../hello";
+import {
+  getApplications,
+  updateApplications,
+} from "../../../../libs/api/mock_api";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const applications = getApplications();
   switch (req.method) {
     case "GET": {
       let { page = "1", limit = "10000" }: any = req.query;
@@ -33,6 +37,7 @@ export default async function handler(
         const id = req.query.id;
         console.log("id is  ", id);
         let deletedApp = null;
+
         const apps = applications.filter((app: any) => {
           if (app.uid === id) {
             deletedApp = app;
@@ -40,7 +45,7 @@ export default async function handler(
           }
           return true;
         });
-        setApplications(apps);
+        updateApplications(apps);
         return res.status(201).json(deletedApp);
       } catch (error) {
         console.log(error);

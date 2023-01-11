@@ -1,10 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { applications, setApplications } from "../../hello";
+import {
+  getApplications,
+  updateApplications,
+} from "../../../../libs/api/mock_api";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const applications = getApplications();
   switch (req.method) {
     case "GET": {
       let { page = "1", limit = "10000" }: any = req.query;
@@ -31,7 +35,7 @@ export default async function handler(
     case "DELETE": {
       try {
         const id = req.query.id;
-        setApplications(applications.filter((app: any) => app.uid !== id));
+        updateApplications(applications.filter((app: any) => app.uid !== id));
         return res.status(201).json({});
       } catch (error) {
         console.log(error);

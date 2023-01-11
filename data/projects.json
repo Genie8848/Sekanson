@@ -1,0 +1,44 @@
+[
+    {
+        "uid": "jaUACXcaEH4FIhbjID0C",
+        "supply": 10000,
+        "headerMark": null,
+        "network": "ethereum",
+        "contractMetaFile": null,
+        "payables": [
+            {
+                "amount": 100,
+                "address": "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3"
+            }
+        ],
+        "createdAt": {
+            "_seconds": 1673351940,
+            "_nanoseconds": 44000000
+        },
+        "mintPrice": 0.0001,
+        "canAcceptERC20": true,
+        "productionTxnHash": null,
+        "hasMaxMintPerTxn": true,
+        "productionContractAddress": null,
+        "plan": "free",
+        "testnetContractAddress": null,
+        "hasSupplyCap": true,
+        "name": "My Custom Token",
+        "contractVersion": 1,
+        "hasWalletMax": true,
+        "isPaidPremium": false,
+        "website": "",
+        "erc20PaymentOptionsMainnet": [],
+        "maxMintPerTxn": 100,
+        "contractType": "ERC-20",
+        "erc20PaymentOptionsTestnet": [],
+        "testnetTxnHash": null,
+        "contractFile": null,
+        "walletMax": 100,
+        "tokenSymbol": "TOKEN",
+        "sellerFeeBasisPoints": 0,
+        "adminAddresses": [
+            "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3"
+        ]
+    }
+]

@@ -32,7 +32,6 @@ const ProjectsList = (props: Props) => {
         }
     }
 
-
     const ProjectItem = ({ project }: any) => {
         return (
             <div className="w-full flex flex-wrap gap-x-4 gap-y-4">
