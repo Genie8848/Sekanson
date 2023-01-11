@@ -39,6 +39,7 @@ const Projects = (props: Props) => {
                 address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
             }
             const projects = await getProjects(formData)
+            console.log("data iss  ", projects)
             setProjects(projects)
         },
         [],
