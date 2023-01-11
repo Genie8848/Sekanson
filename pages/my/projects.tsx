@@ -7,14 +7,13 @@ import ApplicationList from "../../components/projects/ApplicationList";
 import ProjectsList from "../../components/projects/ProjectsList";
 import { useAppContext } from "../../context/AppContext";
 import { getApplications, getProjects } from "../../libs/api/projects";
-import { projectsData } from "../../libs/projects";
 
 type Props = {};
 
 const Projects = (props: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [loading, setLoading] = useState(false)
-    const { applications, projects, setApplications, setProjects } = useAppContext()
+    const { setApplications, setProjects } = useAppContext()
     const handleClose = () => {
         setIsModalOpen(false);
     }
@@ -40,7 +39,6 @@ const Projects = (props: Props) => {
                 address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
             }
             const projects = await getProjects(formData)
-            console.log("data is  ", projects)
             setProjects(projects)
         },
         [],
@@ -121,11 +119,11 @@ const Projects = (props: Props) => {
                     </div>
                 </div>
                 <div className="w-full flex flex-wrap gap-x-4 gap-y-4">
-                    <ProjectsList projects={projects} />
+                    <ProjectsList />
                 </div>
 
                 <div className="w-full flex flex-wrap gap-x-4 gap-y-4">
-                    <ApplicationList applications={applications} />
+                    <ApplicationList />
                 </div>
             </div>
         </BaseLayout>

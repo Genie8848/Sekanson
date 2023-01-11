@@ -5,7 +5,6 @@ import { deleteProject } from '../../libs/api/projects'
 import { nFormatter } from '../../utils/common'
 
 type Props = {
-    projects: any[]
 }
 
 const getLogoPath = (network: string) => {
@@ -31,7 +30,6 @@ const ProjectsList = (props: Props) => {
 
         }
     }
-
 
     const ProjectItem = ({ project }: any) => {
         return (
@@ -88,7 +86,7 @@ const ProjectsList = (props: Props) => {
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
             {
-                props.projects.map((project: any, index: any) => {
+                projects.map((project: any, index: any) => {
                     return <ProjectItem key={project.uid} project={project} />
                 })
             }

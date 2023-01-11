@@ -4,7 +4,6 @@ import { useAppContext } from '../../context/AppContext'
 import { deleteApplication } from '../../libs/api/projects'
 
 type Props = {
-    applications: any[]
 }
 
 const ApplicationList = (props: Props) => {
@@ -66,7 +65,7 @@ const ApplicationList = (props: Props) => {
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-5">
                 {
-                    props.applications.map((application: any, index: any) => {
+                    applications.map((application: any, index: any) => {
                         return <ApplicationItem key={application.uid} application={application} />
                     })
                 }

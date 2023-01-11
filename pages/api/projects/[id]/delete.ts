@@ -1,10 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { projects, setProjects } from "../../hello";
+import { getProjects, updateProjects } from "../../../../libs/api/mock_api";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const projects = getProjects();
   switch (req.method) {
     case "GET": {
       let { page = "1", limit = "10000" }: any = req.query;
@@ -39,7 +40,7 @@ export default async function handler(
           }
           return true;
         });
-        setProjects(projs);
+        updateProjects(projs);
         return res.status(201).json(deletedProj);
       } catch (error) {
         console.log(error);
