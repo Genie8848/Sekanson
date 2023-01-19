@@ -1,13 +1,93 @@
 import clsx from 'clsx';
+import { FormikContextType, useFormikContext } from 'formik';
 import React, { useState } from 'react'
 import { useManageShopifyPluginContext } from '../../../context/ManageShopifyPluginContext';
+import { ApplicationType } from '../../../types/applications';
 
 type Props = {}
+
+
+const getNetworkInfo = (network: string) => {
+    switch (network) {
+        case "ethereum": {
+            return {
+                mainnet: {
+                    name: "ethereum",
+                    chainName: "Ethereum"
+                },
+                testnet: {
+                    name: "ethereum",
+                    chainName: "Ethereum"
+                }
+            }
+        }
+        case "polygon": {
+            return {
+                mainnet: {
+                    name: "polygon",
+                    chainName: "Polygon"
+                },
+                testnet: {
+                    name: "mumbai",
+                    chainName: "Mumbai"
+                }
+            }
+        }
+        case "optimism": {
+            return {
+                mainnet: {
+                    name: "optimism",
+                    chainName: "Optimism"
+                },
+                testnet: {
+                    name: "goerliOptimism",
+                    chainName: "Goerli Optimism"
+                }
+            }
+        }
+        case "arbitrum": {
+            return {
+                mainnet: {
+                    name: "arbitrum",
+                    chainName: "Arbitrum"
+                },
+                testnet: {
+                    name: "goerliArbitrum",
+                    chainName: "Goerli Arbitrum"
+                }
+            }
+        }
+        case "avalanche": {
+            return {
+                mainnet: {
+                    name: "avalanche",
+                    chainName: "Avalanche"
+                },
+                testnet: {
+                    name: "testnetAvalanche",
+                    chainName: "Testnet Avalanche"
+                }
+            }
+        }
+        case "bnb chain": {
+            return {
+                mainnet: {
+                    name: "binance",
+                    chainName: "BNB Mainnet"
+                },
+                testnet: {
+                    name: "testnetbinance",
+                    chainName: "BNB Testnet"
+                }
+            }
+        }
+    }
+}
 
 const GetYourEmbedScriptAccordion = (props: Props) => {
 
     const [active, setActive] = useState(true);
-    const { application, setApplication } = useManageShopifyPluginContext()
+    const formik: FormikContextType<ApplicationType> = useFormikContext()
 
     return (
         <>
@@ -72,7 +152,7 @@ const GetYourEmbedScriptAccordion = (props: Props) => {
                 </a>
                 <div className="w-full flex-col space-y-4 my-4">
                     <div className="flex-col space-y-1">
-                        <p className="text-gray-600 text-lg">Goerli Optimism</p>
+                        <p className="text-gray-600 text-lg">{getNetworkInfo(formik.values.network || "")?.testnet.chainName}</p>
                         <p className="text-gray-600 text-xs">
                             Copy this embed HTML code into your shop to allow people to
                             verify their holdings on the Goerli Optimism network.
@@ -84,45 +164,58 @@ const GetYourEmbedScriptAccordion = (props: Props) => {
                     >
                         <pre className="text-gray-500 text-xs break-all flex  flex-wrap p-3">
                             <br />
-                            &lt;!-- Plugin provided by Mintplex.xyz --&gt;
+                            &lt;!-- Plugin provided by Sekanson --&gt;
                             <br />
                             &lt;script <br />
-                            &nbsp;data-plugin-id=&ldquo;tCsiAaTfHQTxMjW6W3eh&ldquo; <br />
-                            &nbsp;data-network=&ldquo;goerliOptimism&ldquo; <br />
-                            &nbsp;data-styles=&ldquo;eyJiYW5uZXIiOnsic3R5bGUiOiJiYWNrZ3JvdW5kLWNvbG9yOiAjRkZGRkZGIiwidGV4dCI6bnVsbH0sImN0YSI6eyJzdHlsZSI6ImNvbG9yOiAjYTQyZDJkIiwidGV4dCI6ImFzZmFzIn19&ldquo; <br />
+                            &nbsp;data-plugin-id=&ldquo;{formik.values.uid}&ldquo; <br />
+                            &nbsp;data-network=&ldquo;{getNetworkInfo(formik.values.network || "")?.testnet.name}&ldquo; <br />
+                            &nbsp;data-styles=&ldquo;eyJzcmMiOiJodHRwczovL3lvdXJjb3JlaHViLmNvbS9zZWthbnNvbi9lbWJlZHMvYmFubmVyIiwid2lkdGgiOiIxMDAlIiwiaGVpZ2h0IjoiODBweCIsImJvcmRlciI6Im5vbmUiLCJvdmVyZmxvdyI6ImhpZGRlbiAhaW1wb3J0YW50In0=&ldquo; <br />
                             &nbsp;data-token-id=&ldquo;&ldquo; type=&ldquo;text/javascript&ldquo; <br />
-                            &nbsp;src=&ldquo;https://mintplex.xyz/embeds/shopify/setup.js&ldquo; <br />
+                            &nbsp;src=&ldquo;https://yourcorehub.com/sekanson/resources/setup.js&ldquo; <br />
                             &gt;&lt;/script&gt;
                             <br />
-                            &lt;!-- End Mintplex.xyz Plugin --&gt;
+                            &lt;!-- End Sekanson Plugin --&gt;
                             <br />
                         </pre>
                     </div>
                 </div>
                 <div className="w-full flex-col space-y-4 my-4">
                     <div className="flex-col space-y-1 ">
-                        <p className="text-gray-600 text-lg">Optimism</p>
+                        <p className="text-gray-600 text-lg">
+                            {getNetworkInfo(formik.values.network || "")?.mainnet.chainName}
+                        </p>
                         <p className="text-gray-600 text-xs">
                             Copy this embed HTML code into your shop to allow people to
                             verify their holdings on the Optimism network.
                         </p>
                     </div>
                     <div className="relative border border-gray-600 bg-gray-100 p-5 h-fit min-h-[150px] rounded-md overflow-x-hidden">
-                        <div className="w-full h-full flex justify-center items-center absolute z-10">
+                        {/* <div className="w-full h-full flex justify-center items-center absolute z-10">
                             <button
                                 type="button"
                                 className="bg-ramppblue text-white rounded-md px-4 py-1"
                             >
                                 Pay to unlock this plugin!
                             </button>
-                        </div>
+                        </div> */}
                         <pre
+                            data-tip="Click to copy to clipboard"
                             className="relative text-gray-500 text-xs break-all"
-                            style={{ filter: "blur(7px)", zIndex: 1 }}
+                        // style={{ filter: "blur(7px)", zIndex: 1 }}
                         >
-                            &lt;!-- Plugin provided by Mintplex.xyz --&gt; Oh you think
-                            you&ldquo;re clever or something dont you? &lt;!-- End Mintplex.xyz
-                            Plugin --&gt;
+                            <br />
+                            &lt;!-- Plugin provided by Sekanson --&gt;
+                            <br />
+                            &lt;script <br />
+                            &nbsp;data-plugin-id=&ldquo;{formik.values.uid}&ldquo; <br />
+                            &nbsp;data-network=&ldquo;{getNetworkInfo(formik.values.network || "")?.mainnet.name}&ldquo; <br />
+                            &nbsp;data-styles=&ldquo;eyJzcmMiOiJodHRwczovL3lvdXJjb3JlaHViLmNvbS9zZWthbnNvbi9lbWJlZHMvYmFubmVyIiwid2lkdGgiOiIxMDAlIiwiaGVpZ2h0IjoiODBweCIsImJvcmRlciI6Im5vbmUiLCJvdmVyZmxvdyI6ImhpZGRlbiAhaW1wb3J0YW50In0=&ldquo; <br />
+                            &nbsp;data-token-id=&ldquo;&ldquo; type=&ldquo;text/javascript&ldquo; <br />
+                            &nbsp;src=&ldquo;https://yourcorehub.com/sekanson/resources/setup.js&ldquo; <br />
+                            &gt;&lt;/script&gt;
+                            <br />
+                            &lt;!-- End Sekanson Plugin --&gt;
+                            <br />
                         </pre>
                     </div>
                 </div>
