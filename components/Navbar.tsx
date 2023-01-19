@@ -1,6 +1,7 @@
 import { Listbox } from "@headlessui/react";
 import clsx from "clsx";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
 import Web3 from "web3";
 import { useAppContext } from "../context/AppContext";
@@ -18,6 +19,14 @@ const Navbar = (props: Props) => {
     const showInstallMetamask = status !== "pageNotLoaded" && !isMetamaskInstalled;
     const showConnectButton = status !== "pageNotLoaded" && isMetamaskInstalled && !wallet;
     const isConnected = status !== "pageNotLoaded" && typeof wallet === "string";
+    const router = useRouter()
+    useEffect(() => {
+        if (!isConnected) {
+            router.replace("/")
+        }
+        console.log("wallet", wallet)
+    }, [router])
+
 
     const handleConnect = async () => {
         dispatch({ type: "loading" });
@@ -40,7 +49,9 @@ const Navbar = (props: Props) => {
     };
 
     const handleDisconnect = () => {
+        dispatch({ type: "loading" });
         dispatch({ type: "disconnect" });
+        window.location.href = "/"
     };
 
     const [isMenuOpened, setIsMenuOpened] = useState(false)
