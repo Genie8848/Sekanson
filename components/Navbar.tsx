@@ -20,7 +20,7 @@ const Navbar = (props: Props) => {
     const showConnectButton = status !== "pageNotLoaded" && isMetamaskInstalled && !wallet;
     const isConnected = status !== "pageNotLoaded" && typeof wallet === "string";
     const router = useRouter()
-  
+
 
 
     const handleConnect = async () => {
@@ -597,7 +597,7 @@ const Navbar = (props: Props) => {
             <header className="h-16 bg-white md:h-20 flex justify-center items-center z-30 w-full overflow-visible border-b-2 border-gray-100">
                 <div className="container mx-auto px-6 flex items-center justify-between">
                     <div className="dark:text-white flex gap-x-6 items-center">
-                        <Link href="/">
+                        <Link href="/my/projects">
                             <img
                                 src="/android-chrome-512x512.png"
                                 className="h-12"

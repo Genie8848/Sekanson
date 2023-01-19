@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { Field, FormikContextType, useFormikContext } from 'formik';
 import React, { useState } from 'react'
+import { useManageShopifyPluginContext } from '../../../context/ManageShopifyPluginContext';
 import { ApplicationType } from '../../../types/applications';
 
 type Props = {}
@@ -9,6 +10,7 @@ const ShopifyStoreSettingsAccordion = (props: Props) => {
 
     const [active, setActive] = useState(true);
     const formik: FormikContextType<ApplicationType> = useFormikContext()
+    const { validationError } = useManageShopifyPluginContext()
     const SetupTabs = () => {
         const [activeTab, setActiveTab] = useState(0);
         const formik: FormikContextType<ApplicationType> = useFormikContext()
@@ -275,8 +277,39 @@ const ShopifyStoreSettingsAccordion = (props: Props) => {
                     </a>
                 </div>
             </div>
+            {
+                formik.isInitialValid || formik.isValid && (formik.isSubmitting ? (
+                    <button className="px-6 py-1 flex space-x-2 items-center rounded-md bg-transparent border border-gray-600 text-gray-500 hover:bg-gray-300 hover:text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-spin h-6">
+                            <line x1="12" y1="2" x2="12" y2="6"></line>
+                            <line x1="12" y1="18" x2="12" y2="22"></line>
+                            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                            <line x1="2" y1="12" x2="6" y2="12"></line>
+                            <line x1="18" y1="12" x2="22" y2="12"></line>
+                            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24">
+                            </line>
+                            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                        </svg>
+                        <p> Validating</p>
+                    </button>
+                ) : validationError.error ? (
+                    <button className="px-6 py-1 flex space-x-2 items-center rounded-md bg-transparent border border-red-600 text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2"
+                            strokeLinecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        <p>{validationError.message}</p>
+                    </button>
+                ) : (
+                    <button className="px-6 py-1 flex space-x-2 items-center rounded-md bg-transparent border border-gray-600 text-gray-500 hover:bg-gray-300 hover:text-gray-600">
+                        <p> Validate Shopify Settings</p>
+                    </button>
+                ))
+            }
         </>
-
     )
 }
 

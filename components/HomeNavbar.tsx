@@ -46,11 +46,6 @@ const HomeNavbar = (props: Props) => {
         dispatch({ type: "loading" });
         window.location.href = "/my/projects"
     };
-
-    const handleDisconnect = () => {
-        dispatch({ type: "disconnect" });
-    };
-
     const [isMenuOpened, setIsMenuOpened] = useState(false)
 
     useEffect(() => {
@@ -261,7 +256,7 @@ const HomeNavbar = (props: Props) => {
                                 </button>
                             )}
 
-                            {showInstallMetamask && (
+                            {/* {showInstallMetamask && (
                                 <a href="https://metamask.io/"
                                     rel="noreferrer"
                                     target="_blank">
@@ -269,7 +264,7 @@ const HomeNavbar = (props: Props) => {
                                         Connect Wallet
                                     </button>
                                 </a>
-                            )}
+                            )} */}
 
                         </nav>
 
