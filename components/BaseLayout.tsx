@@ -1,8 +1,10 @@
 import clsx from "clsx";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 import { WithChildren } from "../types/common";
 import Footer from "./Footer";
+import HomeNavbar from "./HomeNavbar";
 import { LoaderLarge } from "./Loaders";
 import Navbar from "./Navbar";
 
@@ -10,6 +12,7 @@ interface LayoutProps extends WithChildren {
     sidebar?: ReactNode;
 }
 const BaseLayout = ({ children }: LayoutProps) => {
+    const router = useRouter()
     return (
         <>
             <Head>
@@ -24,7 +27,9 @@ const BaseLayout = ({ children }: LayoutProps) => {
                 )
             }
             >
-                <Navbar />
+                {
+                    router.pathname === "/" ? <HomeNavbar /> : <Navbar />
+                }
                 <div className="min-h-[70vh]">
                     {children}
                 </div>
