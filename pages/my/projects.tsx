@@ -76,7 +76,7 @@ const Projects = (props: Props) => {
                 className="fixed w-screen h-screen top-0"
                 style={{
                     zIndex: -1,
-                    opacity: 0.45,
+                    opacity: 0.75,
                     backgroundImage: "url(/images/bg.svg)",
                 }}
             >

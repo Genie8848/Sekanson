@@ -588,7 +588,7 @@ const Navbar = (props: Props) => {
 
     return (
         <div>
-            <header className="h-16 md:h-20 flex justify-center items-center z-30 w-full overflow-visible border-b-2 border-gray-100">
+            <header className="h-16 bg-white md:h-20 flex justify-center items-center z-30 w-full overflow-visible border-b-2 border-gray-100">
                 <div className="container mx-auto px-6 flex items-center justify-between">
                     <div className="dark:text-white flex gap-x-6 items-center">
                         <Link href="/">
