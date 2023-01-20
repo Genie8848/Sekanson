@@ -7,11 +7,13 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
 import { ApplicationType } from "../types/applications";
 import { WithChildren } from "../types/common";
+import { useCookies } from "react-cookie";
 
 interface IContextProps {
   loading: boolean;
@@ -53,6 +55,9 @@ export function ManageShopifyPluginContextWrapper({
     message: ""
   })
 
+
+
+
   const handleChangeApplication = ({ type, value }: { type: string, value: any }) => {
     setLoading(true)
     formik.setFieldValue(type, value)
@@ -73,6 +78,8 @@ export function ManageShopifyPluginContextWrapper({
       .required('desiredBalance cannot be empty'),
 
   })
+
+
   const formik = useFormik({
     initialValues: pluginData.application,
     validationSchema,
@@ -112,6 +119,11 @@ export function ManageShopifyPluginContextWrapper({
       }
     }
   })
+
+  const [cookies, setCookie, removeCookie] = useCookies([pluginData.application.uid || "application"]);
+  useEffect(() => {
+    setCookie(pluginData.application.uid || "application", JSON.stringify({ ...pluginData.application, ...formik.values }, null, 4), { path: '/' })
+  }, [formik])
 
   let sharedState: IContextProps = useMemo(
     () => ({
