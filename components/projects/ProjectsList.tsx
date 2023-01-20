@@ -37,7 +37,7 @@ const ProjectsList = (props: Props) => {
                 <div id="t295a45fd-810a-4187-8e82-6ca4caa406ea" data-id="tooltip">
                 </div>
                 <Link
-                    href={`/${project.uid}/settings`}
+                    href={`/${project.uid}`}
                     style={{ width: "30rem" }}
                     className="relative bg-gradient-to-tr hover:from-gray-100 flex flex-col h-40 border-2 border-gray-200 bg-white rounded-lg hover:shadow-md cursor-pointer"
                 >

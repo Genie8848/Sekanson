@@ -4,15 +4,19 @@ import { AppContextWrapper } from '../context/AppContext'; // import based on wh
 import { MetamaskProvider } from '../hooks/useMetamask';
 import { CookiesProvider } from 'react-cookie';
 
+import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const activeChainId = ChainId.Mumbai;
   return (
-    <CookiesProvider>
-      <AppContextWrapper >
-        <MetamaskProvider>
-          <Component {...pageProps} />
-        </MetamaskProvider>
-      </AppContextWrapper>
-    </CookiesProvider>
+    <ThirdwebProvider desiredChainId={activeChainId}>
+      <CookiesProvider>
+        <AppContextWrapper >
+          <MetamaskProvider>
+            <Component {...pageProps} />
+          </MetamaskProvider>
+        </AppContextWrapper>
+      </CookiesProvider>
+    </ThirdwebProvider>
   )
 }
