@@ -12,7 +12,7 @@ const networkChains: Array<{ id: ChainId, name: string, src: string, className: 
         name: "Ethereum",
         src: "/images/eth-logo.svg",
         className: "border-gray-300  border hover:border-gray-700 text-gray-300 hover:text-gray-700",
-        activeClass: "bg-gray-100 text-gray-700 border-gray-700",
+        activeClass: "bg-gray-200 text-gray-700 border-gray-700",
     },
     {
         id: ChainId.Polygon,

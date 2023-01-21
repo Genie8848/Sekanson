@@ -277,7 +277,7 @@ const ShopifyStoreSettingsAccordion = (props: Props) => {
                         }
                         name="shopifySecretKey"
                         autoComplete="off"
-                        placeholder="Shopify App API Key"
+                        placeholder="Shopify App Secret Key"
                     />
                     {formik.errors.shopifySecretKey && formik.touched.shopifySecretKey && (
                         <p className="text-red-700 font-light">
