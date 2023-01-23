@@ -4,22 +4,20 @@ export interface ApplicationType {
   contractType?: string;
   url?: string;
   testnetContractAddress?: string;
-  priceRuleData?: any;
+  adminAccessScope?: any;
   isPaidPremium?: boolean;
   productionContractAddress?: string;
   tokenId?: string | any;
   type?: string;
-  createdAt?: {
-    _nanoseconds: number;
-    _seconds: number;
-  };
+  createdAt?: number;
   network?: string;
   shopURL?: string;
   discountCode?: string;
   name?: string | any;
-  adminAddresses?: Array<string>;
+  adminAddress?: string | any;
   shopifyAPIKey?: string;
   shopifySecretKey?: string;
+  shopifyAccessToken?: string;
   desiredBalance?: number;
   ctaText?: string;
   ctaTextColor?: string;

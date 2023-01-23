@@ -15,40 +15,45 @@ const Projects = (props: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [loading, setLoading] = useState(false)
     const { setApplications, setProjects } = useAppContext()
+    //const { dispatch, state: { status, wallet, balance }, } = useMetamask();
     const handleClose = () => {
         setIsModalOpen(false);
     }
 
-    const fetchApplications = useCallback(
-        async () => {
-            const formData = {
-                address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3"
-            }
+    const [wallet, setWallet] = useState(null);
+    const [balance, setBalance] = useState(null);
+
+    useEffect(() => {
+        const local = window.localStorage.getItem("metamaskState");
+        const data = local ? JSON.parse(local) : null;        
+        setWallet(data.wallet);
+        setBalance(data.balance);
+    },  [])
+
+    useEffect(() => {
+        const fetchApplications = async() => {
             try {
-                const applications = await getApplications(formData)
+                const applications = await getApplications(wallet)
+                console.log("applications", applications)
                 if (applications) {
                     setApplications(applications)
                     console.log("applications iss  ", applications)
                 }
-
             } catch (error) {
                 console.log("error iss  ", error)
             }
-        },
-        [],
-    )
+        }
+
+        if (wallet !== null && wallet !== undefined) {
+            fetchApplications()
+        }
+        
+    }, [wallet, setApplications])
 
     useEffect(() => {
-        fetchApplications()
-    }, [fetchApplications])
-
-    const fetchProjects = useCallback(
-        async () => {
-            const formData = {
-                address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3"
-            }
+        const fetchProjects = async() => {
             try {
-                const projects = await getProjects(formData)
+                const projects = await getProjects(wallet)
                 if (projects) {
                     setProjects(projects)
                     console.log("data iss  ", projects)
@@ -56,15 +61,12 @@ const Projects = (props: Props) => {
             } catch (error) {
                 console.log("error iss  ", error)
             }
-        },
-        [],
-    )
-
-    useEffect(() => {
-        fetchProjects()
-    }, [fetchProjects])
-
-
+        };
+        if (wallet !== null && wallet !== undefined) {
+            fetchProjects()
+        }
+    }, [wallet, setProjects]);
+    
     return (
         <BaseLayout>
             {isModalOpen && <NewProjectModal setLoading={setLoading} onClose={handleClose} />}
