@@ -120,8 +120,8 @@ const MintComponent = (props: Props) => {
                 (activeClaimCondition.isSuccess &&
                     BigNumber.from(activeClaimCondition.data?.availableSupply || 0).lte(
                         0
-                    )) ||
-                numberClaimed === numberTotal
+                    ))/* ||
+                numberClaimed === numberTotal*/
             );
         } catch (e) {
             return false;
