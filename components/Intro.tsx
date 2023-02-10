@@ -1,6 +1,6 @@
 import { Yeseva_One } from "@next/font/google";
 import clsx from "clsx";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import React, { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { useListen } from "../hooks/useListen";
@@ -13,6 +13,8 @@ type Props = {};
 
 
 const Intro = (props: Props) => {
+    const router = useRouter();
+
     const { dispatch, state: { status, isMetamaskInstalled, wallet, balance }, } = useMetamask();
     const [play, setPlay] = useState(false)
     const handleConnect = async () => {
@@ -23,8 +25,8 @@ const Intro = (props: Props) => {
 
         if (accounts.length > 0) {
             try {
-                const sdk = new ThirdwebSDK("goerli");
-                const edition = await sdk.getContract("0xEe58A930D719469eCa78A63f62a1064d6b686d49", "nft-collection");
+                const sdk = new ThirdwebSDK("mainnet");
+                const edition = await sdk.getContract("0x40AF75C18afF1DC542FA121CbC8Ae18f164004bC", "nft-collection");
                 const balance = await edition.balanceOf(accounts[0]);
                 
                 if (balance.eq(0)) {
@@ -35,7 +37,8 @@ const Intro = (props: Props) => {
                         setPlay(false)
                       }, 3000)
                 } else {
-                    window.location.href = "/main"
+                    router.push('/main');
+                    //window.location.href = "/main"
                 }
             } catch (e) {
                 console.log(e);
@@ -51,8 +54,8 @@ const Intro = (props: Props) => {
     return (
         <section className="intro_bg">
             <Head>
-                <title>Sekanson - Build and grow your NFT community without code</title>
-                <meta name="description" content="Launching and managing an NFT community is hard. Sekanson has all the tools you need to launch, track, and manage your NFT community and project at scale. All without code."></meta>
+                <title>sekanson - do you have the key?</title>
+                <meta name="description" content="Adding value to those who seek it."></meta>
                 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>

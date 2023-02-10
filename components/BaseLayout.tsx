@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useState } from "react";
 import { WithChildren } from "../types/common";
 import Footer from "./Footer";
@@ -13,7 +13,7 @@ interface LayoutProps extends WithChildren {
     sidebar?: ReactNode;
 }
 const BaseLayout = ({ children }: LayoutProps) => {
-    const router = useRouter()
+    const router = useRouter();
 
     const [canGo, enableGo] = useState(false);
 
@@ -24,17 +24,17 @@ const BaseLayout = ({ children }: LayoutProps) => {
             });
 
             if (accounts.length > 0) {
-                const sdk = new ThirdwebSDK("goerli");
-                const edition = await sdk.getContract("0xEe58A930D719469eCa78A63f62a1064d6b686d49", "nft-collection");
+                const sdk = new ThirdwebSDK("mainnet");
+                const edition = await sdk.getContract("0x40AF75C18afF1DC542FA121CbC8Ae18f164004bC", "nft-collection");
                 const balance = await edition.balanceOf(accounts[0]);
                 
                 if (balance.eq(0)) {
-                    return window.location.href = "/";
+                    router.push('/');
                 } else {
                     enableGo(true);
                 }
             } else {
-                return window.location.href = "/";
+                router.push('/');
             }
         }
         checkBalance();
