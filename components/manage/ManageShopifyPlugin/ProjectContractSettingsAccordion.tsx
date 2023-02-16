@@ -143,13 +143,13 @@ const ProjectContractSettingsAccordion = (props: Props) => {
                     active ? "block" : "hidden"
                 )}
             >
-                <div className="relative w-3/4 my-4">
+                <div className="relative w-4/5 my-4">
                     <label className="text-gray-500">Blockchain</label>
                     <p className="text-xs text-gray-500">
                         Select the blockchain of where your contract is deployed. This
                         contract must exist.
                     </p>
-                    <div className="mt-4 mb-6 w-full grid grid-cols-3 gap-4 items-center ">
+                    <div className="mt-4 mb-6 w-full grid grid-cols-2 md:grid-cols-3 gap-4 items-center ">
 
                         {/* {networkChains.map((networkChain, index) => {
                             return (

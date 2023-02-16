@@ -30,7 +30,7 @@ const BaseLayout = ({ children }: LayoutProps) => {
                 {
                     router.pathname === "/" ? <HomeNavbar /> : <Navbar />
                 }
-                <div className="min-h-[70vh] flex flex-col items-center">
+                <div className="min-h-[70vh] flex flex-col items-center z-[100] relative px-5 lg:px-10">
                     {children}
                 </div>
                 <Footer />

@@ -12,9 +12,11 @@ const Footer = (props: Props) => {
     return (
         <footer className="bg-white w-full md:px-16 md:my-6">
             <div className="flex flex-col md:flex-row w-full md:justify-between md:px-16 items-center">
-                <div className="flex-col w-40">
-                    <img src="/android-chrome-512x512.png" className="w-auto h-20" alt="Sekanson.xyz" />
-                    <p className="text-gray-600 text-xs -mt-2">Build better NFT communities without code.</p>
+                <div className="flex-col w-40 justify-center items-center">
+                    <div className='w-full flex justify-center py-2'>
+                        <img src="/android-chrome-512x512.png" className="w-auto h-20" alt="Sekanson.xyz" />
+                    </div>
+                    <p className="text-gray-600 text-xs -mt-2 text-center">Build better NFT communities without code.</p>
                     <div className="mt-3">
                         <img src="/images/alchemy.svg" className="w-auto h-20 -mb-6" alt="Alchemy Certified Infrastructure Alliance" />
                         <p className="text-gray-500" style={{
@@ -24,7 +26,7 @@ const Footer = (props: Props) => {
                         </p>
                     </div>
                 </div>
-                <div className="w-fit flex flex-col space-y-2 py-6 md:py-4 items-center md:items-end">
+                <div className="w-fit flex flex-col justify-center space-y-2 py-6 md:py-4 items-center md:items-end">
                     {
                         connected ? (
                             <button

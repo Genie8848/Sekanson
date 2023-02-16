@@ -7,21 +7,28 @@ import Web3 from "web3";
 import { useAppContext } from "../context/AppContext";
 import { useListen } from "../hooks/useListen";
 import { useMetamask } from "../hooks/useMetamask";
-import { AllChains, getChainByChainId, getChainInfoByChainId } from "../libs/constants";
+import {
+    AllChains,
+    getChainByChainId,
+    getChainInfoByChainId,
+} from "../libs/constants";
 import web3 from "../libs/getWeb3";
 import { hexToDecimal, truncateAddress } from "../utils/address";
 type Props = {};
 
 const Navbar = (props: Props) => {
-    const { currentChainId, setCurrentChainId } = useAppContext()
-    const { dispatch, state: { status, isMetamaskInstalled, wallet, balance }, } = useMetamask();
+    const { currentChainId, setCurrentChainId } = useAppContext();
+    const {
+        dispatch,
+        state: { status, isMetamaskInstalled, wallet, balance },
+    } = useMetamask();
     const listen = useListen();
-    const showInstallMetamask = status !== "pageNotLoaded" && !isMetamaskInstalled;
-    const showConnectButton = status !== "pageNotLoaded" && isMetamaskInstalled && !wallet;
+    const showInstallMetamask =
+        status !== "pageNotLoaded" && !isMetamaskInstalled;
+    const showConnectButton =
+        status !== "pageNotLoaded" && isMetamaskInstalled && !wallet;
     const isConnected = status !== "pageNotLoaded" && typeof wallet === "string";
-    const router = useRouter()
-
-
+    const router = useRouter();
 
     const handleConnect = async () => {
         dispatch({ type: "loading" });
@@ -35,7 +42,7 @@ const Navbar = (props: Props) => {
                 params: [accounts[0], "latest"],
             });
 
-            console.log("nati ", accounts, balance)
+            console.log("nati ", accounts, balance);
             dispatch({ type: "connect", wallet: accounts[0], balance });
 
             // we can register an event listener for changes to the users wallet
@@ -46,10 +53,10 @@ const Navbar = (props: Props) => {
     const handleDisconnect = () => {
         dispatch({ type: "loading" });
         dispatch({ type: "disconnect" });
-        window.location.href = "/"
+        window.location.href = "/";
     };
 
-    const [isMenuOpened, setIsMenuOpened] = useState(false)
+    const [isMenuOpened, setIsMenuOpened] = useState(false);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -68,18 +75,17 @@ const Navbar = (props: Props) => {
             }
 
             // local could be null if not present in LocalStorage
-            const { wallet, balance } = local ? JSON.parse(local) : // backup if local storage is empty
-                { wallet: null, balance: null };
+            const { wallet, balance } = local
+                ? JSON.parse(local) // backup if local storage is empty
+                : { wallet: null, balance: null };
             const getChainId = async () => {
                 const chainId = await web3.eth.getChainId();
                 setCurrentChainId(chainId);
-            }
-            getChainId()
+            };
+            getChainId();
             dispatch({ type: "pageLoaded", isMetamaskInstalled, wallet, balance });
         }
     }, []);
-
-
 
     // const ChainMenu = () => {
     //     <Menu>
@@ -184,7 +190,7 @@ const Navbar = (props: Props) => {
     //             </button>
     //             <button
     //                 type="button"
-    //                 className="w-full px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 
+    //                 className="w-full px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900
     //   border-b border-transparent"
     //                 role="menuitem"
     //             >
@@ -272,18 +278,18 @@ const Navbar = (props: Props) => {
     // };
 
     const ToolsPopupMenu = () => {
-        const [isActive, setIsActive] = useState(false)
+        const [isActive, setIsActive] = useState(false);
         return (
             <div className="relative inline-block text-left">
                 <button
                     type="button"
-                    onClick={() => setIsActive(prev => !prev)}
+                    onClick={() => setIsActive((prev) => !prev)}
                     className="py-1 text-gray-800 border-b border-white hover:border-gray-200 flex items-center"
                     id="options-menu"
                 >
                     Tools
                 </button>
-                {isActive &&
+                {isActive && (
                     <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10">
                         <div
                             className="py-1"
@@ -301,7 +307,7 @@ const Navbar = (props: Props) => {
                             </Link>
                             <Link
                                 href="/tools/metadata-maker"
-                                className="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                                className="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 0 dark:hover:text-white dark:hover:bg-gray-600"
                                 role="menuitem"
                             >
                                 <span className="flex flex-col">
@@ -319,19 +325,19 @@ const Navbar = (props: Props) => {
                             </Link>
                         </div>
                     </div>
-                }
+                )}
             </div>
-        )
-    }
+        );
+    };
 
     const ToolsWithExtraPopupMenu = () => {
-        const [isActive, setIsActive] = useState(false)
+        const [isActive, setIsActive] = useState(false);
         return (
             <div className="relative inline-block text-left">
                 <button
                     type="button"
-                    onClick={() => setIsActive(prev => !prev)}
-                    className="py-1 text-gray-800 border-b border-white hover:border-gray-200 flex items-center"
+                    onClick={() => setIsActive((prev) => !prev)}
+                    className="py-1 text-gray-50 border-white hover:border-gray-200 flex items-center"
                     id="options-menu"
                 >
                     Tools &amp; Extras
@@ -352,9 +358,8 @@ const Navbar = (props: Props) => {
                     >
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
-
                 </button>
-                {isActive &&
+                {isActive && (
                     <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10">
                         <div
                             className="py-1 "
@@ -374,7 +379,7 @@ const Navbar = (props: Props) => {
                             </Link>
                             <Link
                                 href="/tools/metadata-maker"
-                                className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                                className="block block px-4 py-2 text-md text-gray-900 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
                                 role="menuitem"
                             >
                                 <span className="flex flex-col">
@@ -392,16 +397,19 @@ const Navbar = (props: Props) => {
                             </Link>
                         </div>
                     </div>
-                }
+                )}
             </div>
-        )
-    }
+        );
+    };
 
     const ProfilePopupMenu = () => {
-        const [isActive, setIsActive] = useState(false)
+        const [isActive, setIsActive] = useState(false);
         return (
             <div className="relative inline-block text-left">
-                <div onClick={() => setIsActive(prev => !prev)} className="flex items-center space-x-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg">
+                <div
+                    onClick={() => setIsActive((prev) => !prev)}
+                    className="flex items-center space-x-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg"
+                >
                     <div className="flex">
                         <div
                             style={{
@@ -443,11 +451,11 @@ const Navbar = (props: Props) => {
                             </svg>
                         </div>
                     </div>
-                    <p className="text-gray-900 text-base font-semibold">
+                    <p className="text-gray-50 text-base font-semibold">
                         {truncateAddress(wallet || "")}
                     </p>
                 </div>
-                {isActive &&
+                {isActive && (
                     <div className="origin-top-right absolute right-0 mt-2 w-fit rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10">
                         <div
                             className="py-1 "
@@ -458,33 +466,38 @@ const Navbar = (props: Props) => {
                             <button className="w-full text-left px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600">
                                 Refresh Cache
                             </button>
-                            <button onClick={() => {
-                                setIsActive(false)
-                                handleDisconnect()
-                            }} className="w-full text-left px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600">
+                            <button
+                                onClick={() => {
+                                    setIsActive(false);
+                                    handleDisconnect();
+                                }}
+                                className="w-full text-left px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                            >
                                 Disconnect
                             </button>
                         </div>
                     </div>
-                }
+                )}
             </div>
-        )
-    }
+        );
+    };
 
     const switchNetwork = async (chainId: number) => {
         if (typeof window !== "undefined") {
             if (currentChainId !== chainId) {
                 try {
                     await window.ethereum.request({
-                        method: 'wallet_switchEthereumChain',
-                        params: [{ chainId: Web3.utils.toHex(chainId) }]
+                        method: "wallet_switchEthereumChain",
+                        params: [{ chainId: Web3.utils.toHex(chainId) }],
                     });
                     listen();
 
-                    setCurrentChainId(chainId)
+                    setCurrentChainId(chainId);
                     console.log(`switched to chainid : ${chainId} succesfully`);
                 } catch (err: any) {
-                    console.log(`error occured while switching chain to chainId ${chainId}, err: ${err.message} code: ${err.code}`);
+                    console.log(
+                        `error occured while switching chain to chainId ${chainId}, err: ${err.message} code: ${err.code}`
+                    );
                     if (err.code === 4902) {
                         console.log(`Error in adding`);
                         addNetwork(getChainInfoByChainId(chainId));
@@ -492,27 +505,26 @@ const Navbar = (props: Props) => {
                 }
             }
         }
-    }
-
+    };
 
     const addNetwork = async (networkDetails: any) => {
         try {
             await window.ethereum.request({
-                method: 'wallet_addEthereumChain',
-                params: [
-                    networkDetails,
-                ]
+                method: "wallet_addEthereumChain",
+                params: [networkDetails],
             });
-            setCurrentChainId(networkDetails.chainId)
+            setCurrentChainId(networkDetails.chainId);
         } catch (err: any) {
-            console.log(`error occured while adding new chain with chainId:${networkDetails.chainId}, err: ${err.message}`)
+            console.log(
+                `error occured while adding new chain with chainId:${networkDetails.chainId}, err: ${err.message}`
+            );
         }
-    }
+    };
 
     const ChainSelectMenu = () => {
-        const currentChain = getChainByChainId(currentChainId)
+        const currentChain = getChainByChainId(currentChainId);
         return (
-            <div className="relative">
+            <div className="relative !z-[1000]">
                 <Listbox
                     value={currentChainId} onChange={(data) => {
                         console.log(data.chainInfo.chainId, "selected Chain")
@@ -537,8 +549,7 @@ const Navbar = (props: Props) => {
                             </polyline>
                         </svg>
                     </Listbox.Button>
-                    <Listbox.Options className="bg-white z-20 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5
-                    ">
+                    <Listbox.Options className="!z-[100] mt-2 w-48 rounded-md  bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 absolute origin-top-right right-0 shadow-2xl">
                         {AllChains.map((chain) => (
                             <Listbox.Option
                                 key={chain.id}
@@ -565,36 +576,40 @@ const Navbar = (props: Props) => {
                         ))}
                     </Listbox.Options>
                 </Listbox>
+
             </div>
-
-        )
-
+        );
     };
 
     const MenuButton = () => {
         return (
             <button
                 onClick={() => {
-                    setIsMenuOpened(prev => !prev)
+                    setIsMenuOpened((prev) => !prev);
                 }}
                 type="button"
-                className={
-                    clsx(
-                        "transition duration-200 ease-in-out lg:hidden flex flex-col ml-4",
-                        isMenuOpened ? "rotate-90" : "rotate-0"
-                    )
-                }
+                className={clsx(
+                    "transition duration-200 ease-in-out lg:hidden flex flex-col ml-4",
+                    isMenuOpened ? "rotate-90" : "rotate-0"
+                )}
             >
                 <span className="w-6 h-1 bg-gray-800 mb-1"></span>
                 <span className="w-6 h-1 bg-gray-800 mb-1"></span>
                 <span className="w-6 h-1 bg-gray-800 mb-1"></span>
             </button>
-        )
-    }
+        );
+    };
 
     return (
-        <div>
-            <header className="h-16 bg-white md:h-20 flex justify-center items-center z-30 w-full overflow-visible border-b-2 border-gray-100">
+        <div className="">
+            <div className="absolute w-full h-80 flex top-0 -z-100">
+                <img
+                    className="w-full h-full absolute object-cover"
+                    src="/images/navbg.jpeg"
+                    alt=""
+                />
+            </div>
+            <header className="h-16 relative md:h-20 flex justify-center items-center z-[1000] w-full overflow-visible ">
                 <div className="container mx-auto px-6 flex items-center justify-between">
                     <div className="dark:text-white flex gap-x-6 items-center">
                         <Link href="/my/projects">
@@ -609,50 +624,49 @@ const Navbar = (props: Props) => {
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <div className="flex gap-x-2 items-center hover:bg-gray-50 rounded-lg p-2">
+                            <div className="flex gap-x-2 items-center text-white  hover:bg-gray-50 hover:text-gray-700 rounded-lg p-2">
                                 <p className="text-2xl">🎉</p>
                                 <div className=" flex flex-col">
-                                    <p className="text-gray-500 text-sm">
+                                    <p className="  text-sm">
                                         Sekanson Pro now only <b>$12.00 per month</b>!
                                     </p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    {
-                        wallet ?
-                            (
-                                <div className="flex items-center">
-                                    <nav className="text-gray-800 dark:text-white text-md lg:flex space-x-8 items-center hidden">
-
-                                        <div className="flex items-center space-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="24"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                className={
-                                                    clsx(
-                                                        "h-4 w-4 text-gray-600",
-                                                        balance !== null && "text-green-500"
-                                                    )
-                                                }
-                                            >
-                                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                                            </svg>
-                                            <p className={
-                                                clsx(
-                                                    "text-base text-gray-600",
-                                                    balance !== null ? "text-green-400" : "text-gray-600"
-                                                )
-                                            }>{web3.utils.fromWei(balance || "", 'ether')}</p>
-                                        </div>
-                                        {/* <div className="relative inline-block text-left">
+                    {wallet ? (
+                        <div className="flex items-center">
+                            <nav className="text-gray-50 dark:text-white text-md lg:flex space-x-8 items-center hidden">
+                                <div className="flex items-center space-x-2">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        className={clsx(
+                                            "h-4 w-4 text-gray-600",
+                                            balance !== null && "text-green-500"
+                                        )}
+                                    >
+                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                    </svg>
+                                    <p
+                                        className={clsx(
+                                            "text-base text-gray-600",
+                                            balance !== null ? "text-green-400" : "text-gray-600"
+                                        )}
+                                    >
+                                        {Number(web3.utils.fromWei(balance || "", "ether")).toFixed(
+                                            2
+                                        )}
+                                    </p>
+                                </div>
+                                {/* <div className="relative inline-block text-left">
                                     <div>
                                         <button
                                             type="button"
@@ -694,112 +708,125 @@ const Navbar = (props: Props) => {
                                         ></div>
                                     </div>
                                 </div>  */}
-                                        <ChainSelectMenu />
-                                        <a
-                                            href="https://trusting-lungfish-ebb.notion.site/Sekanson-FAQ-s-91f5d2700d764031a44c064ed49f8aec"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="flex items-center pb-1 border-b border-white hover:border-gray-200"
-                                        >
-                                            Support
-                                        </a>
-                                        <ToolsWithExtraPopupMenu />
+                                <ChainSelectMenu />
+                                <a
+                                    href="https://trusting-lungfish-ebb.notion.site/Sekanson-FAQ-s-91f5d2700d764031a44c064ed49f8aec"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex items-center pb-1  border-white hover:border-gray-200"
+                                >
+                                    Support
+                                </a>
+                                <ToolsWithExtraPopupMenu />
 
-                                        <ProfilePopupMenu />
-                                    </nav>
-                                    <button className="transition duration-200 ease-in-out lg:hidden flex flex-col ml-4">
-                                        <span className="w-6 h-1 bg-gray-800 mb-1"></span>
-                                        <span className="w-6 h-1 bg-gray-800 mb-1"></span>
-                                        <span className="w-6 h-1 bg-gray-800 mb-1"></span>
-                                    </button>
-                                </div>
-                            ) : (
-                                <div className="flex items-center">
-                                    <nav className="text-gray-800 dark:text-white text-md  space-x-8 items-center hidden lg:flex">
-                                        <a
-                                            href="https://trusting-lungfish-ebb.notion.site/Sekanson-FAQ-s-91f5d2700d764031a44c064ed49f8aec"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className=""
-                                        >
-                                            FAQ
-                                        </a>
-                                        <ToolsPopupMenu />
-                                        <a
-                                            href="https://twitter.com/@sekansonnft"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            Twitter
-                                        </a>
-                                        {showConnectButton && (
-                                            <button
-                                                onClick={handleConnect}
-                                                className="py-1 px-2 flex items-center gap-x-2 text-ramppblue hover:text-white border-2 border-ramppblue rounded-md hover:bg-ramppdeepblue"
+                                <ProfilePopupMenu />
+                            </nav>
+                            <button className="transition duration-200 ease-in-out lg:hidden flex flex-col ml-4">
+                                <span className="w-6 h-1 bg-gray-800 mb-1"></span>
+                                <span className="w-6 h-1 bg-gray-800 mb-1"></span>
+                                <span className="w-6 h-1 bg-gray-800 mb-1"></span>
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="flex items-center">
+                            <nav className="text-gray-50 dark:text-white text-md  space-x-8 items-center hidden lg:flex">
+                                <a
+                                    href="https://trusting-lungfish-ebb.notion.site/Sekanson-FAQ-s-91f5d2700d764031a44c064ed49f8aec"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className=""
+                                >
+                                    FAQ
+                                </a>
+                                <ToolsPopupMenu />
+                                <a
+                                    href="https://twitter.com/@sekansonnft"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Twitter
+                                </a>
+                                {showConnectButton && (
+                                    <button
+                                        onClick={handleConnect}
+                                        className="py-1 px-2 flex items-center gap-x-2 text-ramppblue hover:text-white border-2 border-ramppblue rounded-md hover:bg-ramppdeepblue"
+                                    >
+                                        {status === "loading" && (
+                                            // <svg
+                                            //     className="animate-spin -ml-1 mr-3 h-5 w-5 text-ramppblue hover:text-white"
+                                            //     xmlns="http://www.w3.org/2000/svg"
+                                            //     fill="none"
+                                            //     viewBox="0 0 24 24"
+                                            // >
+                                            //     <circle
+                                            //         className="opacity-25"
+                                            //         cx="12"
+                                            //         cy="12"
+                                            //         r="10"
+                                            //         stroke="currentColor"
+                                            //         strokeWidth="4"
+                                            //     ></circle>
+                                            //     <path
+                                            //         className="opacity-75"
+                                            //         fill="currentColor"
+                                            //         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                            //     ></path>
+                                            // </svg>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                className="animate-spin h-6"
                                             >
-                                                {status === "loading" && (
-                                                    // <svg
-                                                    //     className="animate-spin -ml-1 mr-3 h-5 w-5 text-ramppblue hover:text-white"
-                                                    //     xmlns="http://www.w3.org/2000/svg"
-                                                    //     fill="none"
-                                                    //     viewBox="0 0 24 24"
-                                                    // >
-                                                    //     <circle
-                                                    //         className="opacity-25"
-                                                    //         cx="12"
-                                                    //         cy="12"
-                                                    //         r="10"
-                                                    //         stroke="currentColor"
-                                                    //         strokeWidth="4"
-                                                    //     ></circle>
-                                                    //     <path
-                                                    //         className="opacity-75"
-                                                    //         fill="currentColor"
-                                                    //         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                                    //     ></path>
-                                                    // </svg>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-spin h-6">
-                                                        <line x1="12" y1="2" x2="12" y2="6"></line>
-                                                        <line x1="12" y1="18" x2="12" y2="22"></line>
-                                                        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-                                                        <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-                                                        <line x1="2" y1="12" x2="6" y2="12"></line>
-                                                        <line x1="18" y1="12" x2="22" y2="12"></line>
-                                                        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24">
-                                                        </line>
-                                                        <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
-                                                    </svg>
-                                                )}
-                                                {status === "loading" ? "Loading" : "Launch Project"}
-                                            </button>
+                                                <line x1="12" y1="2" x2="12" y2="6"></line>
+                                                <line x1="12" y1="18" x2="12" y2="22"></line>
+                                                <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                                                <line
+                                                    x1="16.24"
+                                                    y1="16.24"
+                                                    x2="19.07"
+                                                    y2="19.07"
+                                                ></line>
+                                                <line x1="2" y1="12" x2="6" y2="12"></line>
+                                                <line x1="18" y1="12" x2="22" y2="12"></line>
+                                                <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                                                <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                                            </svg>
                                         )}
+                                        {status === "loading" ? "Loading" : "Launch Project"}
+                                    </button>
+                                )}
 
-                                        {showInstallMetamask && (
-                                            <a href="https://metamask.io/"
-                                                rel="noreferrer"
-                                                target="_blank">
-                                                <button className="py-1 px-2 flex items-center gap-x-2 text-ramppblue hover:text-white border-2 border-ramppblue rounded-md hover:bg-ramppdeepblue">
-                                                    Connect Wallet
-                                                </button>
-                                            </a>
-                                        )}
+                                {showInstallMetamask && (
+                                    <a
+                                        href="https://metamask.io/"
+                                        rel="noreferrer"
+                                        target="_blank"
+                                    >
+                                        <button className="py-1 px-2 flex items-center gap-x-2 text-ramppblue hover:text-white border-2 border-ramppblue rounded-md hover:bg-ramppdeepblue">
+                                            Connect Wallet
+                                        </button>
+                                    </a>
+                                )}
+                            </nav>
 
-                                    </nav>
-
-                                    <MenuButton />
-
-                                </div>
-                            )
-                    }
-
+                            <MenuButton />
+                        </div>
+                    )}
                 </div>
             </header>
-            <div className={
-                clsx(
+            <div
+                className={clsx(
                     "fixed opacity-0 flex justify-center z-30 w-full transition duration-200 ease-in-out justify-center bg-white rounded-lg",
                     isMenuOpened ? "opacity-100" : "opacity-0"
-                )
-            }>
+                )}
+            >
                 <div className="flex flex-col text-xl space-y-4 items-baseline">
                     <a
                         href="https://twitter.com/@sekansonnft"
