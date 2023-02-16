@@ -1,4 +1,4 @@
-import Hero from "../components/Hero";
+import Intro from "../components/Intro";
 import PartnersAndFounders from "../components/PartnersAndFounders";
 import FAQ from "../components/FAQ";
 import WhySekanson from "../components/WhySekanson";
@@ -8,14 +8,7 @@ import BaseLayout from "../components/BaseLayout";
 
 export default function Home() {
   return (
-    <BaseLayout>
-      <Hero />
-      <PartnersAndFounders />
-      <WhySekanson />
-      <WhoisSekanson />
-      <SekansonRecipes />
-      <FAQ />
-    </BaseLayout>
+    <Intro />
   );
 }
 

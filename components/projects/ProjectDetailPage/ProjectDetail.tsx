@@ -5,12 +5,13 @@ import { BigNumber, ethers, utils } from 'ethers';
 import React, { useMemo, useState } from 'react'
 import { parseIneligibility } from '../../../utils/parseIneligibility';
 import MintComponent from './MintComponent';
+import Image from 'next/image';
 
 type Props = {}
 
 const networkChains: Array<{ id: ChainId, name: string, src: string, className: string, activeClass: string }> = [
     {
-        id: ChainId.Mainnet,
+        id: ChainId.Goerli,
         name: "Ethereum",
         src: "/images/eth-logo.svg",
         className: "border-gray-300  border hover:border-gray-700 text-gray-300 hover:text-gray-700",
@@ -55,7 +56,7 @@ const networkChains: Array<{ id: ChainId, name: string, src: string, className: 
 ]
 
 const ProjectDetail = (props: Props) => {
-    const [myNftDropContractAddress, setMyNftDropContractAddress] = useState("0x90E2dD8C48cA35534Dd70e3eC19B362cdf71981E")
+    const [myNftDropContractAddress, setMyNftDropContractAddress] = useState("")
     const [selectedNetwork, setSelectedNetwork] = useState(networkChains[0])
     const [isValidContractAddress, setIsValidContractAddress] = useState(true)
 
@@ -81,11 +82,13 @@ const ProjectDetail = (props: Props) => {
                                     JSON.stringify(selectedNetwork) === JSON.stringify(networkChain) ? networkChain.activeClass : ""
                                 )
                             }>
-                            <img
-                                alt="ethereum"
-                                src={networkChain.src}
-                                className="h-8"
-                            />
+                            <picture>
+                                <img
+                                    alt="ethereum"
+                                    src={networkChain.src}
+                                    className="h-8"
+                                />
+                            </picture>
                             <p>{networkChain.name}</p>
                         </div>
                     )
@@ -167,18 +170,17 @@ const ProjectDetail = (props: Props) => {
                         }
                         name="productionContractAddress"
                         autoComplete="off"
-                        placeholder="0x9a68563da....abe2372665"
+                        placeholder="0x9a68.............2665"
                     />
                     {
                         !isValidContractAddress && (
-                            <p className='text-red-500 font-semibold'>Please enter a valid address</p>
+                            <p className='text-red-500'>Please enter a valid address</p>
                         )
                     }
                 </div>
                 <div>
                     <MintComponent disabled={!ethers.utils.isAddress(myNftDropContractAddress)} myNftDropContractAddress={myNftDropContractAddress} />
                 </div>
-
             </div>
         </section>
     )

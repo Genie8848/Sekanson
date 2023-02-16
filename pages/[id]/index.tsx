@@ -5,6 +5,7 @@ import {
     useContract,
     useUnclaimedNFTSupply
 } from "@thirdweb-dev/react";
+
 import type { NextPage } from "next";
 import { useMemo, useState } from "react";
 import BaseLayout from "../../components/BaseLayout";

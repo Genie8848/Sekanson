@@ -9,10 +9,12 @@ import ShopifyStoreSettingsAccordion from './ShopifyStoreSettingsAccordion';
 import { FormikContextType, useFormikContext } from 'formik';
 import { ApplicationType } from '../../../types/applications';
 import LoadingMessage from './LoadingMessage';
+import { useRouter } from 'next/router';
 
 type Props = {}
 
 const ManageShopifyPlugin = (props: Props) => {
+    const router = useRouter();
     const formik: FormikContextType<ApplicationType> = useFormikContext()
     const { validationError } = useManageShopifyPluginContext()
 
@@ -24,7 +26,7 @@ const ManageShopifyPlugin = (props: Props) => {
                         <button
                             onClick={() => {
                                 if (typeof window !== "undefined") {
-                                    window.location.href = "/my/projects"
+                                    router.push('/my/projects');
                                 }
                             }}
                             className="text-blue-500 underline text-base"
@@ -46,14 +48,13 @@ const ManageShopifyPlugin = (props: Props) => {
                         that will go on your store.
                     </p>
 
-
                     <ProjectContractSettingsAccordion />
                     <ShopifyStoreSettingsAccordion />
                     <BannerStyleSettingsAccordion />
                     <GetYourEmbedScriptAccordion />
                     < >
                         {
-                            formik.isInitialValid || formik.isValid && (formik.isSubmitting ? (
+                            (formik.isSubmitting ? (
                                 <button className="px-6 py-1 flex space-x-2 items-center rounded-md bg-transparent border border-gray-600 text-gray-500 hover:bg-gray-300 hover:text-gray-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-spin h-6">
                                         <line x1="12" y1="2" x2="12" y2="6"></line>
@@ -66,7 +67,7 @@ const ManageShopifyPlugin = (props: Props) => {
                                         </line>
                                         <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
                                     </svg>
-                                    <p> Validating</p>
+                                    <p> Submitting</p>
                                 </button>
                             ) : validationError.error ? (
                                 <button className="px-6 py-1 flex space-x-2 items-center rounded-md bg-transparent border border-red-600 text-red-500">
@@ -79,9 +80,30 @@ const ManageShopifyPlugin = (props: Props) => {
                                     <p>{validationError.message}</p>
                                 </button>
                             ) : (
-                                <button className="px-6 py-1 flex space-x-2 items-center rounded-md bg-transparent border border-gray-600 text-gray-500 hover:bg-gray-300 hover:text-gray-600">
-                                    <p> Validate Shopify Settings</p>
-                                </button>
+                                (validationError.message == 'Success' ? (
+                                    <button className="px-6 py-1 flex space-x-2 items-center rounded-md bg-transparent border border-green-600 text-green-500">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="#00FF00"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="h-6 w-6 text-green-600"
+                                        >
+                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                        </svg>
+                                        <p>{validationError.message}</p>
+                                    </button>
+                                ) : (
+                                    <button disabled={!(formik.isInitialValid || formik.isValid)} className="submit-project px-6 py-1 flex space-x-2 items-center rounded-md bg-transparent border border-gray-600 text-gray-500 hover:bg-gray-300 hover:text-gray-600">
+                                        <p> Submit</p>
+                                    </button>
+                                ))
                             ))
                         }
                     </>

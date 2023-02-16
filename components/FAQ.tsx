@@ -38,7 +38,7 @@ const FAQ = (props: Props) => {
   const SingleFaqComponent = ({ faq }: any) => {
     const [active, setActive] = useState(false)
     return (
-      <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50 ">
+      <div className="bg-white shadow-md p-4 my-2 rounded-md border border-gray-100 cursor-pointer hover:bg-gray-50">
         <dt className="" onClick={() => setActive(prev => !prev)}>
           <h3 className="text-xl text-rampporange font-semibold">
             {faq.title}
@@ -54,10 +54,8 @@ const FAQ = (props: Props) => {
         </dd>
       </div>
     )
+
   }
-
-
-
   return (
     <>
       <section

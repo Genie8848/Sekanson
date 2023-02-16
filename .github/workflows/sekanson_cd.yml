@@ -1,0 +1,28 @@
+name: Sekanson CD
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /home/sekanadmin/work/sekanson-GENESIS-Front-End
+          git pull origin main
+          git status
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm install --lts
+          npm install
+          npm run build
+          npm run export
+          sudo rm -Rf /var/www/html/out
+          sudo cp -R out /var/www/html/

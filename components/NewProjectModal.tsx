@@ -1,8 +1,9 @@
 import clsx from 'clsx'
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
 import { useAppContext } from '../context/AppContext'
 import { createNewProject } from '../libs/api/projects'
 import { createNewApplication } from '../libs/api/applications'
+import { getRandomString } from "../utils/numberUtils";
 
 type Props = {
     onClose: () => void,
@@ -18,46 +19,75 @@ const NewProjectModal = (props: Props) => {
     const [applicationTab, setApplicationTab] = useState("LAUNCH_COMMUNITY")
     const { setApplications, setProjects } = useAppContext()
 
+    const [wallet, setWallet] = useState(null);
+    const [balance, setBalance] = useState(null);
+
+    useEffect(() => {
+        const local = window.localStorage.getItem("metamaskState");
+        const data = local ? JSON.parse(local) : null;        
+        setWallet(data.wallet);
+        setBalance(data.balance);
+    },  [])
+
     const handleCreateNewApplication = async () => {
+        
         try {
             props.setLoading(true)
+            const new_uid = getRandomString();
+            const created_at: number = Date.now();
+
             const formData = {
-                address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
-                applicationInfo: "shop_plugin"
+                adminAddress: wallet,
+                type: "shop_plugin",
+                uid : new_uid,
+                createdAt: created_at
             }
             const data = await createNewApplication(formData)
-            setTimeout(() => {
-                props.onClose()
-            }, 500);
-            setTimeout(() => {
-                setApplications((prev: any) => [...prev, data])
-                props.setLoading(false)
-            }, 1000)
+            if (data != null) {
+                setTimeout(() => {
+                    props.onClose()
+                }, 500);
+                setTimeout(() => {
+                    setApplications((prev: any) => [...prev, data])
+                    props.setLoading(false)
+                }, 1000)
+            } else {
+                alert("Error creating application");
+            }
         } catch (error) {
             console.log("error is ", error)
         }
     }
 
     const handleCreateNewProject = async (token_type: any) => {
+
+        const new_uid = getRandomString();
+        const created_at: number = Date.now();
+
         const formData = {
-            address: "0x767d04c7c1d82b922d9d0b8f4b36d057bc1065d3",
-            contractType: token_type
+            adminAddress: wallet,
+            uid : new_uid,
+            contractType: token_type,
+            createdAt: created_at
         }
         try {
             props.setLoading(true)
             const data = await createNewProject(formData)
-            setTimeout(() => {
-                props.onClose()
-            }, 500);
-            setTimeout(() => {
-                setProjects((prev: any) => [...prev, data])
-                props.setLoading(false)
-            }, 1000)
+            if (data != null) {
+                setTimeout(() => {
+                    props.onClose()
+                }, 500);
+                setTimeout(() => {
+                    setProjects((prev: any) => [...prev, data])
+                    props.setLoading(false)
+                }, 1000)
+            } else {
+                alert("Error creating project");
+            }
         } catch (error) {
             console.log("error is ", error)
         }
     }
-
 
     return (
         <div>
@@ -132,7 +162,7 @@ const NewProjectModal = (props: Props) => {
                                                 applicationTab === ApplicationType.LAUNCH_COMMUNITY ? (
                                                     <div className="w-full flex flex-col space-y-6 mt-2">
                                                         <button
-                                                            onClick={() => handleCreateNewProject("ERC721A")}
+                                                            onClick={() => handleCreateNewProject("ERC-721A")}
                                                             className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
                                                             <img
                                                                 alt="example of ERC721A project"
@@ -166,7 +196,7 @@ const NewProjectModal = (props: Props) => {
                                                             </div>
                                                         </button>
                                                         <button
-                                                            onClick={() => handleCreateNewProject("ERC1155")}
+                                                            onClick={() => handleCreateNewProject("ERC-1155")}
                                                             className="items-center w-full px-4 py-2 border border-gray-300 hover:bg-blue-50 hover:border-ramppblue cursor-pointer rounded-md flex">
                                                             <img
                                                                 alt="example of ERC1155 project"

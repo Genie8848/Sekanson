@@ -1,70 +1,95 @@
 import { fetcher } from "../../utils/address";
+import { SERVER_URL } from "../constants";
 
-export const getApplications = async (formData: any) => {
-  const api_url = `/api/applications/find-by-address`;
+export const getApplications = async (adminAddress: any) => {
+  const api_url = SERVER_URL + `/api/applications/` + adminAddress;
   try {
     const res = await fetch(api_url, {
-      method: "POST",
-      body: JSON.stringify(formData),
+      method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
-    const { applications } = await res.json();
-    return applications;
+    
+    const response = await res.json();
+    console.log('response.error', response.error);
+    if (response.error == null) {
+      return response.applications;
+    }
+    return [];
   } catch (error) {
     console.log(error, " is error getting applications");
     return [];
   }
 };
 
-export const getApplicationById = async (id: any) => {
+export const getApplicationById = async (adminAddress: string, uid: string) => {
+  const api_url = SERVER_URL + `/api/applications/` + adminAddress + "/" + uid;
   try {
-    const { application } = await fetcher(`/api/applications/${id}`, {});
-    return application;
-  } catch (error) {}
+    const res = await fetch(api_url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    
+    const response = await res.json();
+    console.log(response);
+    if (response.error == null) {
+      return response.application;
+    }
+    return null;
+  } catch (error) {
+    console.log(error, " is error getting application");
+    return null;
+  }
 };
 
-export const deleteApplication = async (id: any) => {
-  let deletedApp = null;
-  const api_url = `/api/applications/${id}/delete`;
+export const deleteApplication = async (adminAddress:any, uid: any) => {
+  const api_url = SERVER_URL + `/api/applications/${adminAddress}/${uid}`;
   try {
-    const { projects } = await fetch(api_url, {
+    const result = await fetch(api_url, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     }).then((res) => res.json());
-    return projects;
-  } catch (error) {}
-  return deletedApp;
+    return result;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const createNewApplication = async (formData: any) => {
   try {
-    const { application } = await fetch("/api/applications/create", {
+    const response = await fetch(SERVER_URL + "/api/applications", {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     }).then((res) => res.json());
-    return application;
+    console.log(response);
+    if (response.error == null) {
+      return response.application;
+    } else {
+      return null;
+    }
   } catch (error) {
     console.log(error, " is error");
     return null;
   }
 };
-export const updateApplication = async (id: string, formData: any) => {
+export const updateApplication = async (id: string, uid: string, formData: any) => {
   try {
-    const { application } = await fetch(`/api/applications/${id}/update`, {
+    const response = await fetch(SERVER_URL + `/api/applications/${id}/${uid}`, {
       method: "PATCH",
       body: JSON.stringify(formData),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     }).then((res) => res.json());
-    return application;
+    return response;
   } catch (error) {
     console.log(error, " is error");
     return null;

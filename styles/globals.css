@@ -111,6 +111,45 @@
   animation-iteration-count: infinite
 }
 
+.submit-project:disabled{
+  background: #F3F4F6;
+  cursor: not-allowed;
+}
+
+.intro_bg {
+  display: block;
+  background: #050708;
+  height:100vh;
+  width:100%;
+}
+
+.intro_piece_center{
+  display: block;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.intro {
+  height: 100%;
+  width: 100%;
+}
+
+.intro_connect {
+  background-image: url('/images/intro_connect.png');
+  position: fixed;
+  right: 30px;
+  top: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: center;
+  width: 120px;
+  height: 30px;
+}
+
 /* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
