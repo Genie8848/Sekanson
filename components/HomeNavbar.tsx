@@ -20,7 +20,7 @@ const HomeNavbar = (props: Props) => {
     const showConnectButton = status !== "pageNotLoaded" && isMetamaskInstalled && !wallet;
     const isConnected = status !== "pageNotLoaded" && typeof wallet === "string";
     const router = useRouter()
-   
+
     const handleConnect = async () => {
         dispatch({ type: "loading" });
         const accounts = await window.ethereum.request({

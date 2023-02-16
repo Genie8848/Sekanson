@@ -108,7 +108,7 @@ const NewProjectModal = (props: Props) => {
                             aria-hidden="true"
                         ></span>
                         <div
-                            className="w-1/2 inline-block relative overflow-hidden transform transition-all"
+                            className="w-11/12 sm:w-10/12 md:3/4 my-10 xl:w-1/2 inline-block relative overflow-hidden transform transition-all"
                             role="dialog"
                             aria-modal="true"
                             aria-labelledby="modal-headline"

@@ -98,16 +98,18 @@ const ProjectDetail = (props: Props) => {
     }
 
     return (
-        <section className="flex w-11/12 py-10">
-            <div className="w-1/3 h-full">
-                <img
-                    src="/android-chrome-192x192.png"
-                    alt="thirdweb Logo"
-                    width={135}
-                />
+        <section className="flex flex-col md:flex-row items-center w-11/12 md:py-10 justify-center z-10">
+            <div className="w-11/12 md:w-1/3 h-full flex justify-center">
+                <div className='relative flex justify-center items-start'>
+                    <img
+                        src="/android-chrome-192x192.png"
+                        alt="thirdweb Logo"
+                        width={135}
+                    />
+                </div>
             </div>
-            <div className="w-2/3 flex flex-col relative">
-                <div className="relative w-3/4 my-4">
+            <div className="w-11/12 md:w-2/3 flex flex-col relative items-center">
+                <div className="relative w-full md:w-3/4 my-4">
                     <div
                         className="w-fit flex items-center space-x-2 cursor-pointer"
                         data-tip="This is the network that you contract will be deployed on. This cannot be changed after deployment"
@@ -136,7 +138,7 @@ const ProjectDetail = (props: Props) => {
                         <NetworkOption />
                     </div>
                 </div>
-                <div className="relative w-3/4 md:w-1/2 my-4">
+                <div className="relative w-full  md:w-1/2 my-4">
                     <label
                         htmlFor="productionContractAddress"
                         className="text-gray-500"

@@ -20,8 +20,8 @@ const ManageShopifyPlugin = (props: Props) => {
 
     return (
         <div>
-            <section className=" mx-auto px-6 my-8 w-full flex">
-                <div className="w-1/2 flex-col h-screen overflow-y-scroll pr-4">
+            <section className="flex flex-col mx-auto px-6 my-8 w-full md:flex-row gap-y-10">
+                <div className="w-full md:w-1/2 flex-col h-screen overflow-y-scroll pr-4">
                     <div className="mt-2 mb-6">
                         <button
                             onClick={() => {
@@ -109,7 +109,7 @@ const ManageShopifyPlugin = (props: Props) => {
                     </>
 
                 </div>
-                <div className="w-1/2 flex-col h-screen overflow-y-scroll pr-4 rounded-md border-1">
+                <div className="w-full md:w-1/2 flex-col h-screen overflow-y-scroll pr-4 rounded-md border-1">
                     <ShopifyPluginBrowserFrame key="ShopifyPluginBrowserFrame" />
                 </div>
             </section>

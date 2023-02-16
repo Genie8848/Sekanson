@@ -19,35 +19,36 @@ const Intro = (props: Props) => {
     const [play, setPlay] = useState(false)
     const handleConnect = async () => {
         dispatch({ type: "loading" });
-        const accounts = await window.ethereum.request({
-            method: "eth_requestAccounts",
-        });
-
-        if (accounts.length > 0) {
-            try {
-                const sdk = new ThirdwebSDK("mainnet");
-                const edition = await sdk.getContract("0x40AF75C18afF1DC542FA121CbC8Ae18f164004bC", "nft-collection");
-                const balance = await edition.balanceOf(accounts[0]);
-                
-                if (balance.eq(0)) {
-                    //alert('No NFT on this account');
-                    //return window.location.href = "/";
+        if (window.ethereum) {
+            const accounts = await window.ethereum.request({
+                method: "eth_requestAccounts",
+            });
+            if (accounts.length > 0) {
+                try {
+                    const sdk = new ThirdwebSDK("mainnet");
+                    const edition = await sdk.getContract("0x40AF75C18afF1DC542FA121CbC8Ae18f164004bC", "nft-collection");
+                    const balance = await edition.balanceOf(accounts[0]);
+                    console.log(balance, "---")
+                    if (balance.eq(0)) {
+                        alert('No NFT on this account');
+                        //return window.location.href = "/";
+                        setPlay(true);
+                        setTimeout(() => {
+                            setPlay(false)
+                        }, 3000)
+                    } else {
+                        router.push('/main');
+                        //window.location.href = "/main"
+                    }
+                } catch (e) {
+                    console.log(e);
                     setPlay(true);
                     setTimeout(() => {
                         setPlay(false)
-                      }, 3000)
-                } else {
-                    router.push('/main');
-                    //window.location.href = "/main"
+                    }, 3000)
                 }
-            } catch (e) {
-                console.log(e);
-                setPlay(true);
-                setTimeout(() => {
-                    setPlay(false)
-                  }, 3000)
+
             }
-            
         }
     };
 
@@ -60,25 +61,25 @@ const Intro = (props: Props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="intro_bg">
-                    {play == true ? (
-                        <Image 
-                            src="/images/intro_piece.gif"
-                            className="intro_piece_center"
-                            width={147}
-                            height={170}
-                            alt=""/>
-                    ) : (
-                        <Image
-                            src="/images/intro_piece_still.gif"
-                            className="intro_piece_center"
-                            alt=""
-                            width={147}
-                            height={170}
-                        />
-                    )}
-                
-                <button 
-                    className="intro_connect" 
+                {play == true ? (
+                    <Image
+                        src="/images/intro_piece.gif"
+                        className="intro_piece_center"
+                        width={147}
+                        height={170}
+                        alt="" />
+                ) : (
+                    <Image
+                        src="/images/intro_piece_still.gif"
+                        className="intro_piece_center"
+                        alt=""
+                        width={147}
+                        height={170}
+                    />
+                )}
+
+                <button
+                    className="intro_connect"
                     onClick={handleConnect}>
                 </button>
             </div>

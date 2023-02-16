@@ -89,7 +89,7 @@ const Manage = (props: Props) => {
             <div className="fixed opacity-0 z-30 w-full transition duration-200 ease-in-out justify-center bg-white rounded-lg hidden">
                 <div className="flex-col items-baseline"></div>
             </div>
-            <div
+            {/* <div
                 id="mainbg"
                 className="fixed w-screen h-screen top-0"
                 style={{
@@ -98,9 +98,8 @@ const Manage = (props: Props) => {
                     backgroundImage: "url(/images/bg.svg)",
                 }}
             >
-                {/* <Image src="/images/bg.svg" alt={"bg-project"} /> */}
-            </div>
-            <div className="w-full">
+            </div> */}
+            <div className="container mx-auto flex-col my-8 w-full bg-white rounded-2xl !lg:p-14 shadow-2xl">
                 {
                     applicationData.uid && (
                         <ManageShopifyPluginContextWrapper pluginData={{
